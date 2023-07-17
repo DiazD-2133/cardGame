@@ -21,7 +21,6 @@ public enum CardActions
     Damage,
     Draw,
     GainMana,
-    None,
     SelfDamage,
     Times,
 }
@@ -29,8 +28,8 @@ public enum CardActions
 public enum CardStatuses
 {
     Block,
+    Dexterity,
     Exhaust,
-    None,
     Poison,
     Reflect,
     Strength,

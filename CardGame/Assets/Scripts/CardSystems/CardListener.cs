@@ -36,8 +36,6 @@ public class CardListener : MonoBehaviour
                 break;
             case CardActions.GainMana:
                 break;
-            case CardActions.None:
-                break;
             case CardActions.SelfDamage:
                 break;
             case CardActions.Times:
