@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ad2ccf8e45104887e11b5a9ed3730, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: 
+  characterClass: 0
+  characterPrefab: {fileID: 6048639053052563619, guid: d3e52da2aaec26f4d898e698e38e9337, type: 3}
+  splashArt: {fileID: 1658256787, guid: 2d99dcea19fd7ca43b087cfb93ae11b9, type: 3}
+  startingDeck:
+  - {fileID: 11400000, guid: f76facbbc2709f2448f33ba77e469c66, type: 2}
+  - {fileID: 11400000, guid: 4736b258c098a3243a2089c90a32a84c, type: 2}
+  - {fileID: 11400000, guid: 4736b258c098a3243a2089c90a32a84c, type: 2}
+  - {fileID: 11400000, guid: 4736b258c098a3243a2089c90a32a84c, type: 2}
+  - {fileID: 11400000, guid: 4736b258c098a3243a2089c90a32a84c, type: 2}
+  - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
+  - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
+  - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
+  - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
+  - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
+  maxHealth: 80
+  currentHealth: 80
+  armor: 0
+  maxMana: 3
+  currentMana: 3
+  stats: {fileID: 11400000, guid: 9fbdb20f3c34c704eb7bd44d45e59561, type: 2}

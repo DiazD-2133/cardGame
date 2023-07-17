@@ -1,0 +1,16 @@
+ScriptableObject
+* Card
+	Es un script para crear cartas mediante un ScriptableObject
+* Caracter
+	Guarda los datos para contruir la clase, todavia hay caracteristicas 	por agregar.
+*PlayerDataContainer
+	Guarda la informacion inicial de la calse(Vida, robo, armadura, etc), 	la idea es ir modificandola a media que se avance en la partida
+
+Scripts
+- Draw
+	Maneja lo que tiene que ver con el movimiento de las cartas en la 	escena, por ahora tiene solo las funciones de robo, llenar el deck, 	descartar a la pila de descarte.
+
+- Turns
+	Maneja el comienzo del turno del Player y el final del turno, por ahora 	el comienzo se hace por boton. tambien hay una funcion para robar solo 	una carta, esto es para pruebas
+- PlayerData
+	Este script es para el jugador en la escena, por ahora solo crea 	instancias del deck de la calse para que esta pueda modificarse 		mediante avance la partida sin comprometer de deck base.

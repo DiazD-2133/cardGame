@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ad2ccf8e45104887e11b5a9ed3730, type: 3}
+  m_Name: Zombie
+  m_EditorClassIdentifier: 
+  characterClass: 2
+  characterPrefab: {fileID: 4423675945673610806, guid: af13b4d14215b184facbc4a9b068c9c9, type: 3}
+  splashArt: {fileID: 21300000, guid: 935e093d907c9ea4bbc7cfbb487d2628, type: 3}
+  startingDeck: []
+  maxHealth: 30
+  currentHealth: 30
+  armor: 0
+  maxMana: 1
+  currentMana: 1
+  stats: {fileID: 11400000, guid: 67b71da00f245d744b292dd0ffd5256a, type: 2}
