@@ -17,7 +17,7 @@ public enum Target
 
 public enum CardActions
 {
-    Armor,
+    Shield,
     Damage,
     Draw,
     GainMana,

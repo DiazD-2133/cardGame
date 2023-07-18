@@ -18,7 +18,8 @@ MonoBehaviour:
   startingDeck: []
   maxHealth: 30
   currentHealth: 30
-  armor: 0
   maxMana: 1
   currentMana: 1
-  stats: {fileID: 11400000, guid: 67b71da00f245d744b292dd0ffd5256a, type: 2}
+  drawValue: 0
+  armor: 10
+  updateBattleHUD: {fileID: 0}

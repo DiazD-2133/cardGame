@@ -20,10 +20,43 @@ public class Character : ScriptableObject
     public int armor;
     public List<BuffsAndDebuffs> CharacterBuffsList = new List<BuffsAndDebuffs>();
     public List<BuffsAndDebuffs> CharacterDebuffsList = new List<BuffsAndDebuffs>();
+    public BattleHUD updateBattleHUD;
+
+    public void GainArmor(int newArmor)
+    {
+        armor += newArmor;
+        updateBattleHUD.updateArmorHUD(armor);
+    }
+    public int SetArmor(int dmg)
+    {
+        if (dmg > armor)
+        {
+            dmg -= armor;
+            armor = 0;
+            updateBattleHUD.updateArmorHUD(armor);
+            return dmg;
+        }
+        else
+        {
+            armor -= dmg;
+            updateBattleHUD.updateArmorHUD(armor);
+            return 0;
+        }
+    }
 
     public bool TakeDamage(int dmg) 
     {
-        currentHealth -= dmg;
+        if(armor > 0) 
+        {
+            dmg = SetArmor(dmg);
+        }
+        
+        if (dmg > 0)
+        {
+            currentHealth -= dmg;
+            updateBattleHUD.UpdateHPBar(currentHealth, maxHealth);
+        }
+        
         if (currentHealth <= 0)
         {
             return true;

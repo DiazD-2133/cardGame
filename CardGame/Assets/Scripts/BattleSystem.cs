@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Character;
-using static UnityEngine.GraphicsBuffer;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 
@@ -72,7 +71,12 @@ public class BattleSystem : MonoBehaviour
             endPlayerTurnButton.interactable = true;
         }
 
-        playerData.data.armor = 0;
+        if (playerData.data.armor > 0)
+        {
+            playerData.data.armor = 0;
+            playerData.data.SetArmor(playerData.data.armor);
+        }
+        
         decksAndDraw.DrawCards(playerData.data.drawValue);
     }
 
@@ -149,6 +153,16 @@ public class BattleSystem : MonoBehaviour
     public IEnumerator EnemyTurn()
     {
         decksAndDraw.MoveToDiscardDeck();
+
+        foreach (var enemy in enemiesManager.enemiesOnScene)
+        {
+            Player enemyData = enemy.GetComponent<Player>();
+            if(enemyData.data.armor > 0)
+            {
+                enemyData.data.armor = 0;
+                enemyData.data.SetArmor(enemyData.data.armor);
+            }
+        }
 
         // HERE FOR TEST
         StartCoroutine(EnemyAction());

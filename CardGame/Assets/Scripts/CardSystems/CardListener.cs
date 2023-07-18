@@ -10,11 +10,10 @@ public class CardListener : MonoBehaviour
     private void ApplyActions(CardActions action, int value, Player playerData = null, GameObject enemy = null)
     {
         switch (action) {
-            case CardActions.Armor:
+            case CardActions.Shield:
                 if (playerData != null)
                 {
-                    playerData.data.armor += value;
-                    Debug.Log("Actual armor = " + playerData.data.armor);
+                    playerData.data.GainArmor(value);
                 }
                 break;
             case CardActions.Damage:

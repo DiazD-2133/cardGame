@@ -6,53 +6,62 @@ using TMPro;
 
 public class BattleHUD : MonoBehaviour
 {
-    public Player playerData;
+    public Player characterData;
     public TextMeshProUGUI maxHealthText;
     public TextMeshProUGUI currentHealthText;
+    public TextMeshProUGUI currentArmorText;
     public Image healthBarImage;
+    public GameObject armorImage;
+    private Color originalHealthBarColor;
 
     private Vector2 healthBarOriginalSize;
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateCharacterHUD(playerData);
-        UpdateCharacterHUD(playerData);
+        originalHealthBarColor = healthBarImage.color;
+        GenerateHPBar();
+        UpdateHPBar(characterData.data.currentHealth, characterData.data.maxHealth);
+        if(characterData.data.armor > 0)
+        {
+            updateArmorHUD(characterData.data.armor);
+        }
     }
 
-    private void GenerateCharacterHUD(Player characterData)
+    private void GenerateHPBar()
     {
         healthBarOriginalSize = healthBarImage.rectTransform.sizeDelta;
         maxHealthText.text = characterData.data.maxHealth.ToString();
     }
 
-    public void UpdateCharacterHUD(Player character)
+    public void UpdateHPBar(int currentHP, int maxHP)
     {
-        if (character != null)
+        if (currentHP < 0)
         {
-            if (character.data.currentHealth < 0)
-            {
-                character.data.currentHealth = 0;
-            }
-
-            currentHealthText.text = character.data.currentHealth.ToString();
-
-            // Set healthBar width to a percentage of its original value
-            // healthBarOriginalSize.x * (health/ maxHealth)
-            
-            healthBarImage.rectTransform.sizeDelta = new Vector2(healthBarOriginalSize.x * ((float)character.data.currentHealth/ (float)character.data.maxHealth), healthBarImage.rectTransform.sizeDelta.y);
+            currentHP = 0;
         }
+
+        currentHealthText.text = currentHP.ToString();
+
+        // Set healthBar width to a percentage of its original value
+        // healthBarOriginalSize.x * (health/ maxHealth)
+            
+        healthBarImage.rectTransform.sizeDelta = new Vector2(healthBarOriginalSize.x * ((float)currentHP / (float)maxHP), healthBarImage.rectTransform.sizeDelta.y);
     }
 
-    public void UpdateEnemyHUD(GameObject enemy)
+    public void updateArmorHUD(int armor)
     {
-        Player enemyData = enemy.GetComponent<Player>();
-
-        if (healthBarImage != null && currentHealthText != null && maxHealthText != null)
+        if (armor > 0)
         {
-            UpdateCharacterHUD(enemyData);
+            healthBarImage.color = Color.grey;
+            currentArmorText.text = armor.ToString();
+            armorImage.SetActive(true);
         }
-            
+        else
+        {
+            healthBarImage.color = originalHealthBarColor;
+            armorImage.SetActive(false);
+        }
     }
 }
 
