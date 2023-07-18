@@ -34,6 +34,7 @@ public class BattleSystem : MonoBehaviour
         newPlayerOnScene.name = "Player";
         playerData = newPlayerOnScene.GetComponent<Player>();
         playerData.data = playerCopy;
+        playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<BattleHUD>();
         playerData.pjArt.sprite = character.splashArt;
         playerOnScene = newPlayerOnScene;
     }
@@ -80,7 +81,6 @@ public class BattleSystem : MonoBehaviour
         Player enemyData = enemy.GetComponent<Player>();
         bool isDead = enemyData.data.TakeDamage(dmg);
 
-        enemy.GetComponent<BattleHUD>().UpdateCharacterHUD(enemyData);
         if (isDead)
         {
             enemiesManager.enemiesOnScene.Remove(enemy);
@@ -128,9 +128,31 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    private IEnumerator EnemyAction()
+    {
+        foreach (var enemy in enemiesManager.enemiesOnScene)
+        {
+            List<string> enemyActions = enemy.GetComponent<EnemyBehaviour>().actions;
+            List<float> actionsProbabilities = enemy.GetComponent<EnemyBehaviour>().probabilities;
+            
+            string selectedAction = enemy.GetComponent<EnemyBehaviour>().ChooseAction(enemyActions, actionsProbabilities);
+
+            yield return new WaitForSeconds(1f);
+
+            print("Enemy uses: " + selectedAction);
+
+        }
+        // string selectedAction = ChooseAction(actions, probabilities);
+
+    }
+
     public IEnumerator EnemyTurn()
     {
         decksAndDraw.MoveToDiscardDeck();
+
+        // HERE FOR TEST
+        StartCoroutine(EnemyAction());
+
         yield return new WaitForSeconds(1f);
 
         // if is dead
