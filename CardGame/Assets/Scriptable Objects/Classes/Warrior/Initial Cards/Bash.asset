@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2bc97f97893074fa74257977d4044f, type: 3}
   m_Name: Bash
   m_EditorClassIdentifier: 
-  isImproved: 0
   artwork: {fileID: 0}
   cardName: Bash
   actionsList:
-  - effect: 1
-    value: 8
-    improvedValue: 10
+  - Effect: 1
+    Value: 8
+    ImprovedValue: 10
   statusesList:
-  - status: 6
-    value: 2
-    improvedValue: 3
-  description: 
+  - Status: 6
+    Value: 2
+    ImprovedValue: 3
   cardType: 1
+  isImproved: 0
   manaCost: 2
   improvedManaCost: 2
+  description: 
   target: 1
   selectable: 0

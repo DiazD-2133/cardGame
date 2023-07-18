@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2bc97f97893074fa74257977d4044f, type: 3}
   m_Name: Strike
   m_EditorClassIdentifier: 
-  isImproved: 0
   artwork: {fileID: 0}
   cardName: Strike
   actionsList:
-  - effect: 1
-    value: 6
-    improvedValue: 9
+  - Effect: 1
+    Value: 6
+    ImprovedValue: 9
   statusesList: []
-  description: 
   cardType: 1
+  isImproved: 0
   manaCost: 1
   improvedManaCost: 1
+  description: 
   target: 1
   selectable: 0

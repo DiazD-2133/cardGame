@@ -14,11 +14,12 @@ public class Character : ScriptableObject
     public List<Card> startingDeck;
     public int maxHealth;
     public int currentHealth;
-    public int armor;
     public int maxMana;
     public int currentMana;
-
-    public PlayerDataContainer stats;
+    public int drawValue;
+    public int armor;
+    public List<BuffsAndDebuffs> CharacterBuffsList = new List<BuffsAndDebuffs>();
+    public List<BuffsAndDebuffs> CharacterDebuffsList = new List<BuffsAndDebuffs>();
 
     public bool TakeDamage(int dmg) 
     {
@@ -32,4 +33,17 @@ public class Character : ScriptableObject
             return false;
         }
     }
+
+    public class BuffsAndDebuffs
+    {
+        public CardStatuses Status { get; set; }
+        public int Value { get; set; }
+
+        public BuffsAndDebuffs(CardStatuses status, int value)
+        {
+            Status = status;
+            Value = value;
+        }
+    }
+
 }

@@ -28,7 +28,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
   maxHealth: 80
   currentHealth: 80
-  armor: 0
   maxMana: 3
   currentMana: 3
-  stats: {fileID: 11400000, guid: 9fbdb20f3c34c704eb7bd44d45e59561, type: 2}
+  drawValue: 5
+  armor: 0
+  CharacterBuffsList: []
+  CharacterDebuffsList: []

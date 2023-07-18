@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Character;
+using static UnityEngine.GraphicsBuffer;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 
@@ -22,6 +24,18 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+    }
+
+    private void InstantiateNewPlayer()
+    {
+        GameObject newPlayerOnScene = Instantiate(character.characterPrefab, playerArea.transform);
+        Character playerCopy = Instantiate(character);
+
+        newPlayerOnScene.name = "Player";
+        playerData = newPlayerOnScene.GetComponent<Player>();
+        playerData.data = playerCopy;
+        playerData.pjArt.sprite = character.splashArt;
+        playerOnScene = newPlayerOnScene;
     }
 
     IEnumerator SetupBattle()
@@ -58,7 +72,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         playerData.data.armor = 0;
-        decksAndDraw.DrawCards(playerData.data.stats.drawValue);
+        decksAndDraw.DrawCards(playerData.data.drawValue);
     }
 
     public IEnumerator AttackEnemy(GameObject enemy, int dmg)
@@ -84,6 +98,34 @@ public class BattleSystem : MonoBehaviour
             EndBattle();
         }
 
+    }
+
+    public void ApplyBuffDebuff(Card cardData, BuffsAndDebuffs status, GameObject enemy = null)
+    {
+        List<CardStatuses> BuffsList = new() { CardStatuses.Block, CardStatuses.Dexterity, CardStatuses.Strength, CardStatuses.Reflect };
+        List<CardStatuses> Debuff = new() { CardStatuses.Exhaust, CardStatuses.Poison, CardStatuses.Vulnerable, CardStatuses.Weak };
+
+        if (cardData.target == Target.Enemy)
+        {
+            if (enemy != null) {
+                Player enemyData = enemy.GetComponent<Player>();
+                AddToBuffDebuffList(status, enemyData);
+                Debug.Log(enemyData.data.CharacterDebuffsList[0].Status);
+            }
+            
+        }
+        else if (cardData.target == Target.Player)
+        {
+            AddToBuffDebuffList(status, playerData);
+        }
+        if (cardData.target == Target.Multiple)
+        {
+            foreach (var enemyOnScene in enemiesManager.enemiesOnScene)
+            {
+                Player enemyData = enemyOnScene.GetComponent<Player>();
+                AddToBuffDebuffList(status, enemyData);
+            }
+        }
     }
 
     public IEnumerator EnemyTurn()
@@ -113,15 +155,35 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    private void InstantiateNewPlayer()
+    private void AddToBuffDebuffList(BuffsAndDebuffs status, Player target)
     {
-        GameObject newPlayerOnScene = Instantiate(character.characterPrefab, playerArea.transform);
-        Character playerCopy = Instantiate(character);
+        List<CardStatuses> BuffsList = new() { CardStatuses.Block, CardStatuses.Dexterity, CardStatuses.Strength, CardStatuses.Reflect };
+        List<CardStatuses> Debuff = new() { CardStatuses.Exhaust, CardStatuses.Poison, CardStatuses.Vulnerable, CardStatuses.Weak };
 
-        newPlayerOnScene.name = "Player";
-        playerData = newPlayerOnScene.GetComponent<Player>();
-        playerData.data = playerCopy;
-        playerData.pjArt.sprite = character.splashArt;
-        playerOnScene = newPlayerOnScene;
+        if (BuffsList.Contains(status.Status))
+        {
+            int index = target.data.CharacterBuffsList.IndexOf(status);
+            if (index != -1)
+            {
+                target.data.CharacterBuffsList[index].Value += status.Value;
+            }
+            else
+            {
+                target.data.CharacterBuffsList.Add(status);
+            }
+
+        }
+        else if (Debuff.Contains(status.Status))
+        {
+            int index = target.data.CharacterDebuffsList.IndexOf(status);
+            if (index != -1)
+            {
+                target.data.CharacterDebuffsList[index].Value += status.Value;
+            }
+            else
+            {
+                target.data.CharacterDebuffsList.Add(status);
+            }
+        }
     }
 }

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2bc97f97893074fa74257977d4044f, type: 3}
   m_Name: Defend
   m_EditorClassIdentifier: 
-  isImproved: 0
   artwork: {fileID: 0}
   cardName: Defend
   actionsList:
-  - effect: 0
-    value: 5
-    improvedValue: 8
+  - Effect: 0
+    Value: 5
+    ImprovedValue: 8
   statusesList: []
-  description: 
   cardType: 0
+  isImproved: 0
   manaCost: 1
   improvedManaCost: 1
+  description: 
   target: 0
   selectable: 0

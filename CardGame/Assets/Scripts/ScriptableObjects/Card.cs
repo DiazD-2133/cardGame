@@ -10,7 +10,7 @@ public enum CardType
 }
 public enum Target
 {
-    Self,
+    Player,
     Enemy,
     Multiple,
 }
@@ -40,17 +40,17 @@ public enum CardStatuses
 [System.Serializable]
 public class Action
 {
-    public CardActions effect;
-    public int value;
-    public int improvedValue;
+    public CardActions Effect;
+    public int Value;
+    public int ImprovedValue;
 }
 
 [System.Serializable]
 public class StatusEffect
 {
-    public CardStatuses status;
-    public int value;
-    public int improvedValue;
+    public CardStatuses Status;
+    public int Value;
+    public int ImprovedValue;
 }
 
 [CreateAssetMenu( fileName = "New Card", menuName = "Card")]
@@ -116,8 +116,8 @@ public class Card : ScriptableObject
     {
         foreach (var effect in actionsList)
         {
-            int effectValue = IsImproved(effect.value, effect.improvedValue);
-            description += $"{descriptionSeparators[index]}{effect.effect} {effectValue}";
+            int effectValue = IsImproved(effect.Value, effect.ImprovedValue);
+            description += $"{descriptionSeparators[index]}{effect.Effect} {effectValue}";
                     index++;
         }
     }
@@ -126,8 +126,8 @@ public class Card : ScriptableObject
     {
         foreach (var effect in effectsList)
         {
-            int effectValue = IsImproved(effect.value, effect.improvedValue);
-            description += $"{descriptionSeparators[index]}{effect.status} {effectValue}";
+            int effectValue = IsImproved(effect.Value, effect.ImprovedValue);
+            description += $"{descriptionSeparators[index]}{effect.Status} {effectValue}";
                     index++;
         }
     }
