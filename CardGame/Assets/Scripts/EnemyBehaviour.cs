@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    public Player enemyData;
+    public List<Card> startingDeck;
+    public Card selectedAction;
     public List<string> actions = new (){"Damage 10", "weak 2"};
-    public List<float> probabilities = new (){60f, 40f};
+    public List<float> probabilities;
 
     void Start()
     {
-        
+        startingDeck = enemyData.data.startingDeck;
+        foreach (var card in startingDeck)
+        {
+            card.CreateCard();
+            probabilities.Add(card.probability);
+        }
     }
 
     // Update is called once per frame
-    public string ChooseAction(List<string> actions, List<float> probabilities)
+    public Card ChooseAction(List<Card> actions, List<float> probabilities)
     {
         float totalProbability = 0f;
 

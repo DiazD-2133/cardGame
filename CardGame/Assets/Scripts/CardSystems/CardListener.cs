@@ -79,7 +79,7 @@ public class CardListener : MonoBehaviour
         }
     }
 
-    public void CallApplications(Card cardData, Player playerData, GameObject enemy = null)
+    public void CallCardApplications(Card cardData, Player playerData, GameObject enemy = null)
     {
         if (enemy != null && playerData != null)
         {

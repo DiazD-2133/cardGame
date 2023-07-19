@@ -31,7 +31,7 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
 
         // Calculate the initial position of the card and activate BoxCollider2D
-        if (cardData.target == Target.Player)
+        if (cardData.target == Target.Self)
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
             gridLayoutGroup = rectTransform.GetComponentInParent<GridLayoutGroup>();
@@ -72,7 +72,7 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dragging && cardData.target == Target.Player)
+        if (dragging && cardData.target == Target.Self)
         {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
@@ -88,7 +88,7 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
             if (arrowCollisions.enemy != null)
             {
-                fightRoom.CallApplications(cardData, playerData, arrowCollisions.enemy);
+                fightRoom.CallCardApplications(cardData, playerData, arrowCollisions.enemy);
             } 
             
             if (!arrowCollisions.IsColliding)
@@ -103,10 +103,10 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
         // Cards with target = Self
         if (isColliding == false)
         {
-            fightRoom.CallApplications(cardData, playerData);
+            fightRoom.CallCardApplications(cardData, playerData);
             drawManager.MoveOneToDiscardDeck(gameObject);
         } 
-        else if (cardData.target == Target.Player)
+        else if (cardData.target == Target.Self)
         {
             
             GetComponent<RectTransform>().anchoredPosition = initialPosition;

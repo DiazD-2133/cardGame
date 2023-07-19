@@ -19,8 +19,15 @@ public class EnemiesManager : MonoBehaviour
             newEnemy.name = $"{enemiesList[i].name} {i}";
             Player enemyData = newEnemy.GetComponent<Player>();
             enemyData.data = enemyCopy;
+            newEnemy.GetComponent<EnemyBehaviour>().enemyData = enemyData;
             enemyData.data.updateBattleHUD = newEnemy.GetComponent<BattleHUD>();
             enemyData.pjArt.sprite = enemiesList[i].splashArt;
+
+            if (enemyData.deck.Count == 0)
+            {
+                enemyData.createDeck(enemyData.deck);
+            }
+
             enemiesOnScene.Add(newEnemy);
         }
     }

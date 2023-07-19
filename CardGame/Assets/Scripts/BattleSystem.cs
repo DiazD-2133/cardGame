@@ -9,7 +9,8 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
-    public Character character;
+    public Character SelectedCharacter;
+    public CardListener enemiesActionListener;
     public EnemiesManager enemiesManager;
     public DecksAndDraw decksAndDraw;
     public GameObject playerArea;
@@ -27,14 +28,14 @@ public class BattleSystem : MonoBehaviour
 
     private void InstantiateNewPlayer()
     {
-        GameObject newPlayerOnScene = Instantiate(character.characterPrefab, playerArea.transform);
-        Character playerCopy = Instantiate(character);
+        GameObject newPlayerOnScene = Instantiate(SelectedCharacter.characterPrefab, playerArea.transform);
+        Character playerCopy = Instantiate(SelectedCharacter);
 
         newPlayerOnScene.name = "Player";
         playerData = newPlayerOnScene.GetComponent<Player>();
         playerData.data = playerCopy;
         playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<BattleHUD>();
-        playerData.pjArt.sprite = character.splashArt;
+        playerData.pjArt.sprite = SelectedCharacter.splashArt;
         playerOnScene = newPlayerOnScene;
     }
 
@@ -64,12 +65,30 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
+    private void GetEnemyActionInfo()
+    {
+        foreach (var enemy in enemiesManager.enemiesOnScene)
+        {
+            List<Card> enemyActions = enemy.GetComponent<EnemyBehaviour>().startingDeck;
+            List<float> actionsProbabilities = enemy.GetComponent<EnemyBehaviour>().probabilities;
+            
+            Card selectedAction = enemy.GetComponent<EnemyBehaviour>().ChooseAction(enemyActions, actionsProbabilities);
+
+            enemy.GetComponent<EnemyBehaviour>().selectedAction = selectedAction;
+
+            print($"{enemy.name} uses: {selectedAction.description}");
+
+        }
+    }
+
     public void PlayerTurn()
     {
         if (!endPlayerTurnButton.interactable)
         {
             endPlayerTurnButton.interactable = true;
         }
+
+        GetEnemyActionInfo();
 
         if (playerData.data.armor > 0)
         {
@@ -118,7 +137,7 @@ public class BattleSystem : MonoBehaviour
             }
             
         }
-        else if (cardData.target == Target.Player)
+        else if (cardData.target == Target.Self)
         {
             AddToBuffDebuffList(status, playerData);
         }
@@ -130,24 +149,6 @@ public class BattleSystem : MonoBehaviour
                 AddToBuffDebuffList(status, enemyData);
             }
         }
-    }
-
-    private IEnumerator EnemyAction()
-    {
-        foreach (var enemy in enemiesManager.enemiesOnScene)
-        {
-            List<string> enemyActions = enemy.GetComponent<EnemyBehaviour>().actions;
-            List<float> actionsProbabilities = enemy.GetComponent<EnemyBehaviour>().probabilities;
-            
-            string selectedAction = enemy.GetComponent<EnemyBehaviour>().ChooseAction(enemyActions, actionsProbabilities);
-
-            yield return new WaitForSeconds(1f);
-
-            print("Enemy uses: " + selectedAction);
-
-        }
-        // string selectedAction = ChooseAction(actions, probabilities);
-
     }
 
     public IEnumerator EnemyTurn()
@@ -162,12 +163,13 @@ public class BattleSystem : MonoBehaviour
                 enemyData.data.armor = 0;
                 enemyData.data.SetArmor(enemyData.data.armor);
             }
+
+            Card selectedAction = enemy.GetComponent<EnemyBehaviour>().selectedAction;
+
+            enemiesActionListener.CallCardApplications(selectedAction, enemyData, playerOnScene);
+            yield return new WaitForSeconds(1f);
+
         }
-
-        // HERE FOR TEST
-        StartCoroutine(EnemyAction());
-
-        yield return new WaitForSeconds(1f);
 
         // if is dead
         //  state = BattleState.Lost

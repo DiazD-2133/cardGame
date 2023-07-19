@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f2bc97f97893074fa74257977d4044f, type: 3}
-  m_Name: Strike
+  m_Name: Apply Weak
   m_EditorClassIdentifier: 
   artwork: {fileID: 0}
-  cardName: Strike
-  actionsList:
-  - Effect: 1
-    Value: 6
-    ImprovedValue: 9
-  statusesList: []
-  cardType: 1
+  cardName: Apply Weak
+  actionsList: []
+  statusesList:
+  - Status: 7
+    Value: 2
+    ImprovedValue: 3
+  cardType: 0
   isImproved: 0
   manaCost: 1
   improvedManaCost: 1
-  description: 
+  description: Weak 2
   target: 1
   selectable: 1
-  probability: 0
+  probability: 25

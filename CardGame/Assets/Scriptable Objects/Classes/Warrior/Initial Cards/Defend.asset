@@ -25,4 +25,5 @@ MonoBehaviour:
   improvedManaCost: 1
   description: 
   target: 0
-  selectable: 0
+  selectable: 1
+  probability: 0

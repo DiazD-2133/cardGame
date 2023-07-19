@@ -10,7 +10,7 @@ public enum CardType
 }
 public enum Target
 {
-    Player,
+    Self,
     Enemy,
     Multiple,
 }
@@ -74,6 +74,11 @@ public class Card : ScriptableObject
     public Target target;
 
     public bool selectable;
+    [Header("For Enemies cards")]
+    public float probability;
+
+
+    // For Description
     private List<string> descriptionSeparators = new List<string>{"", " , ", " and "};
     private int index = 0;
 
