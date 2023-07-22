@@ -29,7 +29,18 @@ public class NodeGenerator : MonoBehaviour
         lastPosition.nodes.Add(endPointNode);
         nodesGrid.lists.Add(lastPosition);
 
-        ConnectNodes(nodesGrid.lists[0].nodes, nodesGrid.lists[1].nodes);
+        CreateMap();
+        
+    }
+
+    public void CreateMap()
+    {
+        int index;
+        for (int i = 1; i <  nodesGrid.lists.Count; i++)
+        {
+            index = i - 1;
+            ConnectNodes(nodesGrid.lists[index].nodes, nodesGrid.lists[i].nodes, index);
+        }
     }
 
     private void GenerateGrid()
@@ -111,7 +122,6 @@ public class NodeGenerator : MonoBehaviour
         return gridPositions[(row * numCols) + col - 1];
     }
 
-
     private GameObject InstantiateNode(Vector3 position, int col, int row)
     {
         if (col != lastCol)
@@ -148,21 +158,96 @@ public class NodeGenerator : MonoBehaviour
         }
     }
 
-    private void ConnectNodes(List<GameObject> sourceNodes, List<GameObject> targetNodes)
+    private void ConnectNodes(List<GameObject> sourceNodes, List<GameObject> targetNodes, int index)
     {
+        // Variable to store the node with highest rowIndex from the previous iteration
+        Map.Node previousHighestNode = null;
+
         foreach (var sourceNode in sourceNodes)
         {
-            Debug.Log(sourceNode.name);
-            foreach (var targetNode in targetNodes)
+            Map.Node sourceNodeComponent = sourceNode.GetComponent<Map.Node>();
+            if (index == 0 || sourceNodeComponent.connected == true)
             {
-                Debug.Log(targetNode.name);
-                
-                Map.Node sourceNodeComponent = sourceNode.GetComponent<Map.Node>();
-                Map.Node targetNodeComponent = targetNode.GetComponent<Map.Node>();
+                int numConnections;
 
-                // Por ejemplo, aquí estableceremos una conexión entre todos los nodos.
-                sourceNodeComponent.ConnectTo(targetNodeComponent);
+                // Get the number of connections for the current node
+                if (index != 0)
+                {
+                    sourceNodeComponent.GetRandomNumConnections();
+                    numConnections = sourceNodeComponent.numConnections;
+                }
+                else
+                {
+                    numConnections = sourceNodeComponent.numConnections;
+                }
+
+                // Create a list to store the valid target nodes
+                List<Map.Node> validTargetNodes = new List<Map.Node>();
+
+                foreach (var targetNode in targetNodes)
+                {
+                    Map.Node targetNodeComponent = targetNode.GetComponent<Map.Node>();
+
+                    // Check if the target node is within the valid range for connections
+                    if (IsWithinValidRange(sourceNodeComponent, targetNodeComponent))
+                    {
+                        
+                        // Check if the target node has a higher rowIndex than the previous highest node
+                        if (previousHighestNode == null || targetNodeComponent.rowIndex >= previousHighestNode.rowIndex)
+                        {
+                            validTargetNodes.Add(targetNodeComponent);
+                        }
+                    }
+                }
+
+                // Connect the current node to the target nodes randomly
+                for (int i = 0; i < numConnections; i++)
+                {
+                    // Check if there are valid target nodes to connect with
+                    if (validTargetNodes.Count > 0)
+                    {
+                        // Choose a random target node from the validTargetNodes list
+                        int randomIndex = Random.Range(0, validTargetNodes.Count);
+                        Map.Node selectedNode = validTargetNodes[randomIndex];
+
+                        // Connect the source node to the selected target node
+                        sourceNodeComponent.ConnectTo(selectedNode);
+                        // Debug.Log("Connected: " + sourceNode.name + " to " + selectedNode.name);
+
+                        // Remove the selected node from the targetNodes list to avoid duplicate connections
+                        validTargetNodes.Remove(selectedNode);
+                    }
+                }
+
+                previousHighestNode = sourceNodeComponent.GetNodeWithHighestRowIndex();
+            }
+            else
+            {
+                Destroy(sourceNode);
+            }
+
+            
+        }
+    }
+
+        // Helper function to check if the target node is within the valid range for connections
+    private bool IsWithinValidRange(Map.Node sourceNode, Map.Node targetNode)
+    {
+        int colDiff = Mathf.Abs(targetNode.colIndex - sourceNode.colIndex);
+        int rowDiff = Mathf.Abs(targetNode.rowIndex - sourceNode.rowIndex);
+
+        return colDiff <= 1 && rowDiff <= 1 && colDiff + rowDiff > 0;
+    }
+
+    private bool IsNodeConnectedInNextColumn(Map.Node node, int nextColumnIndex)
+    {
+        foreach (var connectedNode in node.connectedNodes)
+        {
+            if (connectedNode.colIndex == nextColumnIndex)
+            {
+                return true;
             }
         }
+        return false;
     }
 }
