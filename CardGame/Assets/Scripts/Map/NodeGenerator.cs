@@ -173,7 +173,7 @@ public class NodeGenerator : MonoBehaviour
                 // Get the number of connections for the current node
                 if (index != 0)
                 {
-                    sourceNodeComponent.GetRandomNumConnections();
+                    sourceNodeComponent.GetRandomNumConnections(index);
                     numConnections = sourceNodeComponent.numConnections;
                 }
                 else

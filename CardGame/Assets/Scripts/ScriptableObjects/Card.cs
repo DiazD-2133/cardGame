@@ -17,11 +17,12 @@ public enum Target
 
 public enum CardActions
 {
-    Shield,
+    Break,
     Damage,
     Draw,
     GainMana,
     SelfDamage,
+    Shield,
     Times,
 }
 
@@ -74,7 +75,7 @@ public class Card : ScriptableObject
     public Target target;
 
     public bool selectable;
-    [Header("For Enemies cards")]
+    [Header("Only Enemies Cards")]
     public float probability;
 
 

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Character : ScriptableObject
 {
 	public CharacterClass characterClass;
-    public enum CharacterClass{Warrior,Assassin,Enemy}
+    public enum CharacterClass{Warrior, Assassin, Enemy, Boss}
     public GameObject characterPrefab;
     // public Relic startingRelic;
     public Sprite splashArt;

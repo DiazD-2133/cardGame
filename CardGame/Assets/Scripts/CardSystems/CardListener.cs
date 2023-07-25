@@ -9,12 +9,9 @@ public class CardListener : MonoBehaviour
 
     private void ApplyActions(CardActions action, int value, Player playerData = null, GameObject enemy = null)
     {
-        switch (action) {
-            case CardActions.Shield:
-                if (playerData != null)
-                {
-                    playerData.data.GainArmor(value);
-                }
+        switch (action) 
+        {
+            case CardActions.Break:
                 break;
             case CardActions.Damage:
 
@@ -29,6 +26,12 @@ public class CardListener : MonoBehaviour
                 break;
             case CardActions.SelfDamage:
                 break;
+            case CardActions.Shield:
+            if (playerData != null)
+            {
+                playerData.data.GainArmor(value);
+            }
+            break;
             case CardActions.Times:
                 break;
         }

@@ -9,11 +9,11 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
-    public Character SelectedCharacter;
-    public CardListener enemiesActionListener;
-    public EnemiesManager enemiesManager;
-    public DecksAndDraw decksAndDraw;
-    public GameObject playerArea;
+    [SerializeField] private Character SelectedCharacter;
+    [SerializeField] private CardListener enemiesActionListener;
+    [SerializeField] private EnemiesManager enemiesManager;
+    [SerializeField] private DecksAndDraw decksAndDraw;
+    [SerializeField] private GameObject playerArea;
 
     private GameObject playerOnScene;
     private Player playerData;

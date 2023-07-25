@@ -13,9 +13,16 @@ namespace Map
         public bool connected;
         public List<Node> connectedNodes = new List<Node>();
 
-        public void GetRandomNumConnections()
+        public void GetRandomNumConnections(int index)
         {
-            numConnections = Random.Range(1, 3);
+            if(index < 6)
+            {
+                numConnections = Random.Range(1, 4);
+            }
+            else
+            {
+                numConnections = Random.Range(1, 3);
+            }
         }
 
         public void ConnectTo(Node otherNode)
