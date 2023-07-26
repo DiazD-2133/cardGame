@@ -20,7 +20,7 @@ public class EnemiesManager : MonoBehaviour
             Player enemyData = newEnemy.GetComponent<Player>();
             enemyData.data = enemyCopy;
             newEnemy.GetComponent<EnemyBehaviour>().enemyData = enemyData;
-            enemyData.data.updateBattleHUD = newEnemy.GetComponent<BattleHUD>();
+            enemyData.data.updateBattleHUD = newEnemy.GetComponent<CharactersHUD>();
             enemyData.pjArt.sprite = enemiesList[i].splashArt;
 
             if (enemyData.deck.Count == 0)

@@ -34,7 +34,7 @@ public class BattleSystem : MonoBehaviour
         newPlayerOnScene.name = "Player";
         playerData = newPlayerOnScene.GetComponent<Player>();
         playerData.data = playerCopy;
-        playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<BattleHUD>();
+        playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<CharactersHUD>();
         playerData.pjArt.sprite = SelectedCharacter.splashArt;
         playerOnScene = newPlayerOnScene;
     }
@@ -54,6 +54,8 @@ public class BattleSystem : MonoBehaviour
         {
             playerData.createDeck(playerData.deck);
         }
+
+        // playerData.data.maxMovements = 10;
 
         decksAndDraw.InstantiatePlayerCards(playerData);
 

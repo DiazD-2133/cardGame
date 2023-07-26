@@ -14,14 +14,26 @@ public class Character : ScriptableObject
     public List<Card> startingDeck;
     public int maxHealth;
     public int currentHealth;
-    public int maxMana;
-    public int currentMana;
+    public int maxMovements;
+    public int currentMovements;
     public int drawValue;
     public int armor;
     public List<BuffsAndDebuffs> CharacterBuffsList = new List<BuffsAndDebuffs>();
     public List<BuffsAndDebuffs> CharacterDebuffsList = new List<BuffsAndDebuffs>();
-    public BattleHUD updateBattleHUD;
+    public CharactersHUD updateBattleHUD;
 
+    public void GetCurrentMovements()
+    {
+        currentMovements = maxMovements;
+        updateBattleHUD.UpdateCurrentMovements(currentMovements);
+    }
+
+    public void GainMovement(int movement)
+    {
+        currentMovements += movement;
+        updateBattleHUD.UpdateCurrentMovements(currentMovements);
+    }
+    
     public void GainArmor(int newArmor)
     {
         armor += newArmor;

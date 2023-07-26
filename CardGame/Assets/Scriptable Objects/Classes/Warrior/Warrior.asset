@@ -28,8 +28,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 350a3848b7e5bdf4b80c9062443f89d0, type: 2}
   maxHealth: 75
   currentHealth: 75
-  maxMana: 3
-  currentMana: 3
+  maxMovements: 5
+  currentMovements: 5
   drawValue: 5
   armor: 0
   updateBattleHUD: {fileID: 0}

@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 0}
   cardName: Defend
   actionsList:
-  - Effect: 0
+  - Effect: 5
     Value: 5
     ImprovedValue: 8
   statusesList: []

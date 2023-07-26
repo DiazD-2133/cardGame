@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BattleHUD : MonoBehaviour
+public class CharactersHUD : MonoBehaviour
 {
-    public Player characterData;
-    public TextMeshProUGUI maxHealthText;
-    public TextMeshProUGUI currentHealthText;
-    public TextMeshProUGUI currentArmorText;
-    public Image healthBarImage;
-    public GameObject armorImage;
+    [SerializeField] private Player characterData;
+    [SerializeField] private TextMeshProUGUI maxHealthText;
+    [SerializeField] private TextMeshProUGUI currentHealthText;
+    [SerializeField] private TextMeshProUGUI currentArmorText;
+    [SerializeField] private TextMeshProUGUI currentMovementsText;
+    [SerializeField] private TextMeshProUGUI maxMovementsText;
+    [SerializeField] private Image healthBarImage;
+    [SerializeField] private GameObject armorImage;
     private Color originalHealthBarColor;
 
     private Vector2 healthBarOriginalSize;
@@ -22,6 +24,13 @@ public class BattleHUD : MonoBehaviour
         originalHealthBarColor = healthBarImage.color;
         GenerateHPBar();
         UpdateHPBar(characterData.data.currentHealth, characterData.data.maxHealth);
+
+        if (maxMovementsText != null && currentMovementsText != null)
+        {
+            GetMaxMovements();
+            characterData.data.GetCurrentMovements();
+        }
+
         if(characterData.data.armor > 0)
         {
             updateArmorHUD(characterData.data.armor);
@@ -32,6 +41,10 @@ public class BattleHUD : MonoBehaviour
     {
         healthBarOriginalSize = healthBarImage.rectTransform.sizeDelta;
         maxHealthText.text = characterData.data.maxHealth.ToString();
+    }
+    private void GetMaxMovements()
+    {
+        maxMovementsText.text = characterData.data.maxMovements.ToString();
     }
 
     public void UpdateHPBar(int currentHP, int maxHP)
@@ -47,6 +60,11 @@ public class BattleHUD : MonoBehaviour
         // healthBarOriginalSize.x * (health/ maxHealth)
             
         healthBarImage.rectTransform.sizeDelta = new Vector2(healthBarOriginalSize.x * ((float)currentHP / (float)maxHP), healthBarImage.rectTransform.sizeDelta.y);
+    }
+
+    public void UpdateCurrentMovements(int currentMovements)
+    {
+        currentMovementsText.text = currentMovements.ToString();
     }
 
     public void updateArmorHUD(int armor)
