@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class NodeGenerator : MonoBehaviour
+public class GenerateRandomMap : MonoBehaviour
 {
     public GameObject startPointNode;
     public GameObject endPointNode;
-    public Transform startPoint;
-    public Transform endPoint;
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Transform endPoint;
     public GameObject nodePrefab;
-    private float minDistance = 250f;
+    private float minDistance = 300f;
 
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<GameObject> nodes = new List<GameObject>();
@@ -19,10 +19,13 @@ public class NodeGenerator : MonoBehaviour
 
     private void Start()
     {
+    }
+
+    public void GenerateMap()
+    {
         GameObjectList firstPosition = new GameObjectList();
         firstPosition.nodes.Add(startPointNode);
         nodesGrid.lists.Add(firstPosition);
-
         GenerateGrid();
         GenerateRandomNodes();
         GameObjectList lastPosition = new GameObjectList();
@@ -30,10 +33,25 @@ public class NodeGenerator : MonoBehaviour
         nodesGrid.lists.Add(lastPosition);
 
         CreateMap();
-        
     }
 
-    public void CreateMap()
+    public void ClearMap()
+    {
+        gridPositions.Clear();
+        Map.NodeMapInfo startPositionPaths = startPointNode.GetComponent<Map.NodeMapInfo>(); 
+
+        foreach(var path in startPositionPaths.paths){
+            Destroy(path);
+        }
+        foreach(var node in nodes){
+            Destroy(node);
+        }
+
+        nodes.Clear();
+        nodesGrid.lists.Clear();
+    }
+
+    private void CreateMap()
     {
         int index;
         for (int i = 1; i <  nodesGrid.lists.Count; i++)
@@ -67,14 +85,20 @@ public class NodeGenerator : MonoBehaviour
         float startX = center.x - totalWidth / 2f;
         float startY = center.y - totalHeight / 2f;
 
+        // Define the range for random offsets in x and y positions
+        float minXOffset = -90f;
+        float maxXOffset = 90f;
+        float minYOffset = -80f;
+        float maxYOffset = 80f;
+
         // Loop to store the grid positions
         for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
             {
-                // Calculate the position of the current node in the grid
-                float xPos = startX + col * nodeSpacing;
-                float yPos = startY + row * nodeSpacing;
+                // Calculate the position of the current node in the grid with random offsets
+                float xPos = startX + col * nodeSpacing + Random.Range(minXOffset, maxXOffset);
+                float yPos = startY + row * nodeSpacing + Random.Range(minYOffset, maxYOffset);
 
                 // Store the grid position in the list
                 gridPositions.Add(new Vector3(xPos, yPos, 0f));
@@ -131,7 +155,7 @@ public class NodeGenerator : MonoBehaviour
             GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
             newNode.transform.SetParent(transform);
 
-            Map.Node nodeComponent = newNode.GetComponent<Map.Node>();
+            Map.NodeMapInfo nodeComponent = newNode.GetComponent<Map.NodeMapInfo>();
             nodeComponent.colIndex = col;
             nodeComponent.rowIndex = row;
 
@@ -146,7 +170,7 @@ public class NodeGenerator : MonoBehaviour
             GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
             newNode.transform.SetParent(transform);
 
-            Map.Node nodeComponent = newNode.GetComponent<Map.Node>();
+            Map.NodeMapInfo nodeComponent = newNode.GetComponent<Map.NodeMapInfo>();
             nodeComponent.colIndex = col;
             nodeComponent.rowIndex = row;
 
@@ -161,11 +185,11 @@ public class NodeGenerator : MonoBehaviour
     private void ConnectNodes(List<GameObject> sourceNodes, List<GameObject> targetNodes, int index)
     {
         // Variable to store the node with highest rowIndex from the previous iteration
-        Map.Node previousHighestNode = null;
+        Map.NodeMapInfo previousHighestNode = null;
 
         foreach (var sourceNode in sourceNodes)
         {
-            Map.Node sourceNodeComponent = sourceNode.GetComponent<Map.Node>();
+            Map.NodeMapInfo sourceNodeComponent = sourceNode.GetComponent<Map.NodeMapInfo>();
             if (index == 0 || sourceNodeComponent.connected == true)
             {
                 int numConnections;
@@ -182,11 +206,11 @@ public class NodeGenerator : MonoBehaviour
                 }
 
                 // Create a list to store the valid target nodes
-                List<Map.Node> validTargetNodes = new List<Map.Node>();
+                List<Map.NodeMapInfo> validTargetNodes = new List<Map.NodeMapInfo>();
 
                 foreach (var targetNode in targetNodes)
                 {
-                    Map.Node targetNodeComponent = targetNode.GetComponent<Map.Node>();
+                    Map.NodeMapInfo targetNodeComponent = targetNode.GetComponent<Map.NodeMapInfo>();
 
                     // Check if the target node is within the valid range for connections
                     if (IsWithinValidRange(sourceNodeComponent, targetNodeComponent))
@@ -208,7 +232,7 @@ public class NodeGenerator : MonoBehaviour
                     {
                         // Choose a random target node from the validTargetNodes list
                         int randomIndex = Random.Range(0, validTargetNodes.Count);
-                        Map.Node selectedNode = validTargetNodes[randomIndex];
+                        Map.NodeMapInfo selectedNode = validTargetNodes[randomIndex];
 
                         // Connect the source node to the selected target node
                         sourceNodeComponent.ConnectTo(selectedNode);
@@ -231,7 +255,7 @@ public class NodeGenerator : MonoBehaviour
     }
 
         // Helper function to check if the target node is within the valid range for connections
-    private bool IsWithinValidRange(Map.Node sourceNode, Map.Node targetNode)
+    private bool IsWithinValidRange(Map.NodeMapInfo sourceNode, Map.NodeMapInfo targetNode)
     {
         int colDiff = Mathf.Abs(targetNode.colIndex - sourceNode.colIndex);
         int rowDiff = Mathf.Abs(targetNode.rowIndex - sourceNode.rowIndex);
@@ -239,7 +263,7 @@ public class NodeGenerator : MonoBehaviour
         return colDiff <= 1 && rowDiff <= 1 && colDiff + rowDiff > 0;
     }
 
-    private bool IsNodeConnectedInNextColumn(Map.Node node, int nextColumnIndex)
+    private bool IsNodeConnectedInNextColumn(Map.NodeMapInfo node, int nextColumnIndex)
     {
         foreach (var connectedNode in node.connectedNodes)
         {

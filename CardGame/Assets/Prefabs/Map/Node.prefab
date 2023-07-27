@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1392222826384070249}
   - component: {fileID: 2853339605125840933}
   - component: {fileID: 8485966198629477628}
+  - component: {fileID: -3831065810503589770}
   m_Layer: 5
   m_Name: Node
   m_TagString: Node
@@ -38,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7581746502605777077
 CanvasRenderer:
@@ -162,5 +163,23 @@ MonoBehaviour:
   lineRendererObject: {fileID: 7721379314303246883, guid: f73b86f606dd9d94e822299f72e16a95, type: 3}
   colIndex: 0
   rowIndex: 0
-  nodeConnections: 0
   numConnections: 0
+  connected: 0
+  connectedNodes: []
+  paths: []
+--- !u!114 &-3831065810503589770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733749586163073848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c3c7ed4298a794cbfc174852549551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTypesList:
+  - {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
+  roomType: {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
+  node: {fileID: 0}

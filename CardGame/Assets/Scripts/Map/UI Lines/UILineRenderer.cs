@@ -59,6 +59,9 @@ namespace UnityEngine.UI.Extensions
         [SerializeField, Tooltip("Resolution of the Bezier curve, different to line Resolution")]
         internal int bezierSegmentsPerCurve = 10;
 
+		// Souji Code xd
+		public Map.NodeMapInfo connectedTo;
+
         public float LineThickness
         {
             get { return lineThickness; }

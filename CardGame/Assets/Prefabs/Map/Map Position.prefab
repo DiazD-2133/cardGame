@@ -171,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4242306086778920832, guid: fa04837085d011140b45728704d4b3eb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2245
+      value: -2645
       objectReference: {fileID: 0}
     - target: {fileID: 4242306086778920832, guid: fa04837085d011140b45728704d4b3eb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -220,6 +220,7 @@ MonoBehaviour:
   numConnections: 3
   connected: 0
   connectedNodes: []
+  paths: []
 --- !u!224 &6787648415853355162 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4242306086778920832, guid: fa04837085d011140b45728704d4b3eb, type: 3}
@@ -295,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3401002024077464160, guid: 3efd564fc98c9084c999d43bf0becdd0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2245
+      value: 2645
       objectReference: {fileID: 0}
     - target: {fileID: 3401002024077464160, guid: 3efd564fc98c9084c999d43bf0becdd0, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class Node : MonoBehaviour
+    public class NodeMapInfo : MonoBehaviour
     {
         
         public GameObject lineRendererObject;
@@ -11,11 +11,12 @@ namespace Map
         public int rowIndex;
         public int numConnections;
         public bool connected;
-        public List<Node> connectedNodes = new List<Node>();
+        public List<NodeMapInfo> connectedNodes = new List<NodeMapInfo>();
+        public List<UnityEngine.UI.Extensions.UILineRenderer> paths = new List<UnityEngine.UI.Extensions.UILineRenderer>();
 
         public void GetRandomNumConnections(int index)
         {
-            if(index < 6)
+            if(index < 4)
             {
                 numConnections = Random.Range(1, 4);
             }
@@ -25,14 +26,17 @@ namespace Map
             }
         }
 
-        public void ConnectTo(Node otherNode)
+        public void ConnectTo(NodeMapInfo otherNode)
         {
             GameObject newLine = Instantiate(lineRendererObject);
             newLine.transform.SetParent(transform);
             UnityEngine.UI.Extensions.UILineRenderer lineRenderer = newLine.GetComponent<UnityEngine.UI.Extensions.UILineRenderer>();
-            Vector3 startPosition = transform.position;
+            Vector3 startPosition = new Vector3(transform.position.x + 26f, transform.position.y) ;
             Vector3 endPosition = otherNode.transform.position;
             lineRenderer.Points = new Vector2[] { startPosition, endPosition };
+            // lineRenderer.color = Color.red;
+            lineRenderer.connectedTo = otherNode;
+            paths.Add(lineRenderer);
 
             connected = true;
             otherNode.connected = true;
@@ -40,9 +44,9 @@ namespace Map
             connectedNodes.Add(otherNode);
         }
 
-        public Node GetNodeWithHighestRowIndex()
+        public NodeMapInfo GetNodeWithHighestRowIndex()
         {
-            Node nodeWithHighestRowIndex = null;
+            NodeMapInfo nodeWithHighestRowIndex = null;
             int highestRowIndex = int.MinValue;
 
             foreach (var node in connectedNodes)
@@ -55,6 +59,14 @@ namespace Map
             }
 
             return nodeWithHighestRowIndex;
+        }
+
+        void OnDestroy()
+        {
+            foreach(var lineRenderer in paths)
+            {
+                Destroy(lineRenderer);
+            }
         }
     }
 }
