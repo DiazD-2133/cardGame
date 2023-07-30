@@ -7,7 +7,7 @@ using UnityEngine.UI;
     {
         NormalEnemy,
         EliteEnemy,
-        Boos,
+        Boss,
         Event,
         Rest,
         Chest,

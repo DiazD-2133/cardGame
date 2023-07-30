@@ -25,14 +25,7 @@ public class DecksAndDraw : MonoBehaviour
             {
                 if (cards.Count == 0)
                 {
-                    Debug.Log("Reset.");
-                    foreach (var card in discardCards)
-                    {
-                        cards.Add(card);
-                        card.transform.SetParent(playerDeck.transform, false);
-                    }
-
-                    discardCards.Clear();
+                    MoveToDeck();
                 }
 
                 randomIndex = Random.Range(0, cards.Count);
@@ -86,14 +79,15 @@ public class DecksAndDraw : MonoBehaviour
         }
     }
 
-    public string CustomToString(List<GameObject> cardsList)
+    public void MoveToDeck()
     {
-        string result = "Draw List:\n";
-        foreach (GameObject card in cardsList)
+        foreach (var card in discardCards)
         {
-            result += card.name + "\n";
+            cards.Add(card);
+            card.transform.SetParent(playerDeck.transform, false);
         }
-        return result;
+
+        discardCards.Clear();
     }
 }
 

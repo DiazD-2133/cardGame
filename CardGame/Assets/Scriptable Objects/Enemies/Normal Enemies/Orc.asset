@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d9ad2ccf8e45104887e11b5a9ed3730, type: 3}
-  m_Name: Zombie
+  m_Name: Orc
   m_EditorClassIdentifier: 
-  characterClass: 2
+  characterClass: 0
   characterPrefab: {fileID: 4423675945673610806, guid: af13b4d14215b184facbc4a9b068c9c9, type: 3}
-  splashArt: {fileID: 21300000, guid: 935e093d907c9ea4bbc7cfbb487d2628, type: 3}
+  splashArt: {fileID: 21300000, guid: 81c83ef8aad5d0c4c83cb766329c8995, type: 3}
   startingDeck:
-  - {fileID: 11400000, guid: f0e1bc2ff32aa6e40968a0d7d8539cb0, type: 2}
   - {fileID: 11400000, guid: 06125a11c5b31a7449050e06d4f5709a, type: 2}
-  maxHealth: 30
-  currentHealth: 30
-  maxMana: 1
-  currentMana: 1
+  - {fileID: 11400000, guid: f0e1bc2ff32aa6e40968a0d7d8539cb0, type: 2}
+  maxHealth: 35
+  currentHealth: 35
+  maxMovements: 0
+  currentMovements: 0
   drawValue: 0
-  armor: 10
+  armor: 0
   updateBattleHUD: {fileID: 0}

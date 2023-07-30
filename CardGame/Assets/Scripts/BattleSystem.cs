@@ -9,6 +9,10 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
+    public ScenesManager scenesManager;
+    public Button endPlayerTurnButton;
+
+
     [SerializeField] private Character SelectedCharacter;
     [SerializeField] private CardListener enemiesActionListener;
     [SerializeField] private EnemiesManager enemiesManager;
@@ -18,16 +22,9 @@ public class BattleSystem : MonoBehaviour
     private GameObject playerOnScene;
     private Player playerData;
 
-    [SerializeField] private Button endPlayerTurnButton;
-
-    void Start()
-    {
-        state = BattleState.START;
-        StartCoroutine(SetupBattle());
-    }
-
     private void InstantiateNewPlayer()
     {
+        playerArea = scenesManager.battleSceneComponent.playerArea;
         GameObject newPlayerOnScene = Instantiate(SelectedCharacter.characterPrefab, playerArea.transform);
         Character playerCopy = Instantiate(SelectedCharacter);
 
@@ -39,7 +36,7 @@ public class BattleSystem : MonoBehaviour
         playerOnScene = newPlayerOnScene;
     }
 
-    IEnumerator SetupBattle()
+    public IEnumerator SetupBattle()
     {
         if (playerOnScene == null)
         {
@@ -55,11 +52,12 @@ public class BattleSystem : MonoBehaviour
             playerData.createDeck(playerData.deck);
         }
 
-        // playerData.data.maxMovements = 10;
-
+        // Setup player cards
+        decksAndDraw.playerHand = scenesManager.battleSceneComponent.playerHand;
         decksAndDraw.InstantiatePlayerCards(playerData);
 
-        enemiesManager.InstantiateEnemies();
+        endPlayerTurnButton = scenesManager.battleSceneComponent.endPlayerTurnButton;
+        endPlayerTurnButton.GetComponent<EndTurnButton>().battleSystem = this;
 
         yield return new WaitForSeconds(1f);
 
@@ -69,18 +67,25 @@ public class BattleSystem : MonoBehaviour
 
     private void GetEnemyActionInfo()
     {
+        if(enemiesManager.enemiesOnScene.Count != 0){
         foreach (var enemy in enemiesManager.enemiesOnScene)
-        {
-            List<Card> enemyActions = enemy.GetComponent<EnemyBehaviour>().startingDeck;
-            List<float> actionsProbabilities = enemy.GetComponent<EnemyBehaviour>().probabilities;
-            
-            Card selectedAction = enemy.GetComponent<EnemyBehaviour>().ChooseAction(enemyActions, actionsProbabilities);
+            {
+                List<Card> enemyActions = enemy.GetComponent<EnemyBehaviour>().startingDeck;
+                List<float> actionsProbabilities = enemy.GetComponent<EnemyBehaviour>().probabilities;
+                
+                Card selectedAction = enemy.GetComponent<EnemyBehaviour>().ChooseAction(enemyActions, actionsProbabilities);
 
-            enemy.GetComponent<EnemyBehaviour>().selectedAction = selectedAction;
+                enemy.GetComponent<EnemyBehaviour>().selectedAction = selectedAction;
 
-            print($"{enemy.name} uses: {selectedAction.description}");
+                print($"{enemy.name} uses: {selectedAction.description}");
 
+            }
         }
+        else
+        {
+            Debug.Log("No Enemys on Scene");
+        }
+        
     }
 
     public void PlayerTurn()
@@ -155,6 +160,11 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator EnemyTurn()
     {
+        if (endPlayerTurnButton.interactable)
+        {
+            endPlayerTurnButton.interactable = false;
+        }
+
         decksAndDraw.MoveToDiscardDeck();
 
         foreach (var enemy in enemiesManager.enemiesOnScene)
@@ -193,6 +203,9 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.Log("Game Over");
         }
+
+        decksAndDraw.MoveToDiscardDeck();
+        decksAndDraw.MoveToDeck();
     }
 
     private void AddToBuffDebuffList(BuffsAndDebuffs status, Player target)

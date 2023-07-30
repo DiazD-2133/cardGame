@@ -181,5 +181,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomTypesList:
   - {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
-  roomType: {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
+  - {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}
+  normalEnemy: {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
+  rest: {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}
+  boss: {fileID: 11400000, guid: 89b8c3fddf0cad74eb0daee06d579606, type: 2}
+  roomType: {fileID: 0}
   node: {fileID: 0}

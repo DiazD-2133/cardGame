@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd664287975544f44a2f5a83f7ccf4eb, type: 3}
+  m_Name: FloorOne
+  m_EditorClassIdentifier: 
+  normalEnemies:
+  - {fileID: 11400000, guid: ab77acbc09532b94eae5f0b973199eee, type: 2}
+  - {fileID: 11400000, guid: dacd67c793ca1064380588b4734cf5e7, type: 2}
+  eliteEnemies: []
+  bossEnemies: []

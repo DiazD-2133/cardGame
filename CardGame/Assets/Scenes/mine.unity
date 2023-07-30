@@ -1227,8 +1227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d3bf34b4a9d464b97788fe68251deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesList:
-  - {fileID: 11400000, guid: ab77acbc09532b94eae5f0b973199eee, type: 2}
+  normalEnemies:
   - {fileID: 11400000, guid: ab77acbc09532b94eae5f0b973199eee, type: 2}
   enemiesArea: {fileID: 1274885750}
   enemiesOnScene: []

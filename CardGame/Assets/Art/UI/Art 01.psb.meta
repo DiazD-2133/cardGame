@@ -94,6 +94,27 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
+  - name: Player Info
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2172
+      width: 3840
+      height: 128
+    spriteID: 68e64ee4c5ac05a4aa4478fa6f3dc8e0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2172}
+    spritePosition: {x: 0, y: 2032}
   - name: Health
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -102,7 +123,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 2172
+      y: 2308
       width: 768
       height: 28
     spriteID: 96c1894cb35412b41ac6a2a4c80dfde7
@@ -113,8 +134,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 3, y: 2171}
-    spritePosition: {x: 112, y: 2080}
+    uvTransform: {x: 3, y: 2307}
+    spritePosition: {x: 112, y: 1888}
   - name: Background
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -218,13 +239,23 @@ ScriptedImporter:
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
+  - name: Player Info
+    spriteName: Player Info
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 68e64ee4c5ac05a4aa4478fa6f3dc8e0
+    layerID: 8
+    mosaicPosition: {x: 4, y: 2172}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: Health
     spriteName: Health
     isGroup: 0
     parentIndex: -1
     spriteID: 96c1894cb35412b41ac6a2a4c80dfde7
     layerID: 6
-    mosaicPosition: {x: 4, y: 2172}
+    mosaicPosition: {x: 4, y: 2308}
     flatten: 0
     isImported: 1
     isVisible: 1

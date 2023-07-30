@@ -10,7 +10,6 @@ public class GenerateRandomMap : MonoBehaviour
     [SerializeField] private Transform endPoint;
     public GameObject nodePrefab;
     private float minDistance = 300f;
-
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<GameObject> nodes = new List<GameObject>();
     [SerializeField] public NodesList nodesGrid = new NodesList();

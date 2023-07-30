@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
-    public List<Character> enemiesList;
+    public List<Character> normalEnemies;
     public GameObject enemiesArea;
     public List<GameObject> enemiesOnScene;
 
 
-    public void InstantiateEnemies()
+    public void InstantiateEnemies(int totalEnemies, Character enemy)
     {
-        for (int i = 0; i < enemiesList.Count; i++)
+        for (int i = 0; i < totalEnemies; i++)
         {
-            GameObject newEnemy = Instantiate(enemiesList[i].characterPrefab, enemiesArea.transform);
-            Character enemyCopy = Instantiate(enemiesList[i]);
+            GameObject newEnemy = Instantiate(enemy.characterPrefab, enemiesArea.transform);
+            Character enemyCopy = Instantiate(enemy);
 
-            newEnemy.name = $"{enemiesList[i].name} {i}";
+            newEnemy.name = $"{enemy.name} {i}";
             Player enemyData = newEnemy.GetComponent<Player>();
             enemyData.data = enemyCopy;
             newEnemy.GetComponent<EnemyBehaviour>().enemyData = enemyData;
             enemyData.data.updateBattleHUD = newEnemy.GetComponent<CharactersHUD>();
-            enemyData.pjArt.sprite = enemiesList[i].splashArt;
+            enemyData.pjArt.sprite = enemy.splashArt;
 
             if (enemyData.deck.Count == 0)
             {
