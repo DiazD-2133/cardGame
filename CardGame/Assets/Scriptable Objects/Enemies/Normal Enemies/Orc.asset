@@ -18,8 +18,8 @@ MonoBehaviour:
   startingDeck:
   - {fileID: 11400000, guid: 06125a11c5b31a7449050e06d4f5709a, type: 2}
   - {fileID: 11400000, guid: f0e1bc2ff32aa6e40968a0d7d8539cb0, type: 2}
-  maxHealth: 35
-  currentHealth: 35
+  maxHealth: 1
+  currentHealth: 1
   maxMovements: 0
   currentMovements: 0
   drawValue: 0

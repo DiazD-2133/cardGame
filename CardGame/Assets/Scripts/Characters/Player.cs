@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public Image pjArt;
 
     public Character data;
+    public GameObject playerHUD;
+
 
     public List<Card> deck;
 

@@ -40,17 +40,20 @@ public class BattleSystem : MonoBehaviour
     {
         if (playerOnScene == null)
         {
-            InstantiateNewPlayer();
-        } 
-        else
-        {
-            playerData = playerOnScene.GetComponent<Player>();
+            playerData = scenesManager.playerData;
+            playerOnScene = scenesManager.playerOnScene;
         }
 
         if (playerData.deck.Count == 0)
         {
             playerData.createDeck(playerData.deck);
         }
+
+        playerData.playerHUD.SetActive(true);
+
+        // Positioning the player
+        playerArea = scenesManager.battleSceneComponent.playerArea;
+        playerOnScene.transform.SetParent(playerArea.transform, false);
 
         // Setup player cards
         decksAndDraw.playerHand = scenesManager.battleSceneComponent.playerHand;
@@ -203,6 +206,8 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.Log("Game Over");
         }
+
+        playerData.playerHUD.SetActive(false);
 
         decksAndDraw.MoveToDiscardDeck();
         decksAndDraw.MoveToDeck();

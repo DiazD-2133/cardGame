@@ -391,15 +391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameView: {fileID: 891651503}
-  modal: {fileID: 1353292682}
   scenesPosition: {fileID: 477653131}
+  modal: {fileID: 1353292682}
   gameBarPrefab: {fileID: 6739295521832903298, guid: 7b0d7f89c2bd89740b4f45e58cd43ff9, type: 3}
   startScenePrefab: {fileID: 121293110379905256, guid: 518516bc037e7bf458b0a7fac4f81b9b, type: 3}
   battleScenePrefab: {fileID: 5490625466110392653, guid: de7d538496b154142a24b43c416ebcd8, type: 3}
+  SelectedCharacter: {fileID: 11400000, guid: 08e6f6a325e25a140bfada2403e6393b, type: 2}
   activeSCene: {fileID: 0}
   battleSceneComponent: {fileID: 0}
+  startSceneComponent: {fileID: 0}
   gameBarComponent: {fileID: 0}
   gameState: 0
+  playerOnScene: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!1 &891651503
 GameObject:
   m_ObjectHideFlags: 0
