@@ -131,6 +131,41 @@ MonoBehaviour:
   connected: 0
   connectedNodes: []
   paths: []
+--- !u!1 &1470691579137878687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555570256343744381}
+  m_Layer: 5
+  m_Name: MiddleNodes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &555570256343744381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470691579137878687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5149212373565308665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1562143748825156908
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +384,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5527951974159710069}
+  - {fileID: 555570256343744381}
   - {fileID: 6994210115909324505}
   m_Father: {fileID: 6670879962847581356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -409,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPointNode: {fileID: 1373828737771091505}
   endPointNode: {fileID: 8678645415155556635}
+  middleNodesPosition: {fileID: 555570256343744381}
   startPoint: {fileID: 5527951974159710069}
   endPoint: {fileID: 6994210115909324505}
   nodePrefab: {fileID: 6733749586163073848, guid: 3efd564fc98c9084c999d43bf0becdd0, type: 3}

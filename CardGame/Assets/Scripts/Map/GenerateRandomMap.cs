@@ -6,6 +6,7 @@ public class GenerateRandomMap : MonoBehaviour
 {
     public GameObject startPointNode;
     public GameObject endPointNode;
+    [SerializeField] private Transform middleNodesPosition;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
     public GameObject nodePrefab;
@@ -150,18 +151,19 @@ public class GenerateRandomMap : MonoBehaviour
 
     private GameObject InstantiateNode(Vector3 position, int col, int row)
     {
+        GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
+        newNode.transform.SetParent(middleNodesPosition);
+
+        Map.NodeMapInfo nodeComponent = newNode.GetComponent<Map.NodeMapInfo>();
+        nodeComponent.colIndex = col;
+        nodeComponent.rowIndex = row;
+
+        newNode.name = "Node " + col + " " + row;
+        
         if (col != lastCol)
         {
             lastCol = col;
             GameObjectList newNodesColumn = new GameObjectList();
-            GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
-            newNode.transform.SetParent(transform);
-
-            Map.NodeMapInfo nodeComponent = newNode.GetComponent<Map.NodeMapInfo>();
-            nodeComponent.colIndex = col;
-            nodeComponent.rowIndex = row;
-
-            newNode.name = "Node " + col + " " + row; // Renombramos el nodo con el formato deseado
 
             newNodesColumn.nodes.Add(newNode);
             nodesGrid.lists.Add(newNodesColumn);
@@ -169,15 +171,6 @@ public class GenerateRandomMap : MonoBehaviour
         }
         else
         {
-            GameObject newNode = Instantiate(nodePrefab, position, Quaternion.identity);
-            newNode.transform.SetParent(transform);
-
-            Map.NodeMapInfo nodeComponent = newNode.GetComponent<Map.NodeMapInfo>();
-            nodeComponent.colIndex = col;
-            nodeComponent.rowIndex = row;
-
-            newNode.name = "Node " + col + " " + row; // Renombramos el nodo con el formato deseado
-
             nodesGrid.lists[col].nodes.Add(newNode);
 
             return newNode;
