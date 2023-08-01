@@ -25,6 +25,7 @@ public class ScenesManager : MonoBehaviour
     public StartScene startSceneComponent;
     public GameBar gameBarComponent;
     public GameState gameState;
+    public MapInfo mapData;
 
     public GameObject playerOnScene;
     public Player playerData;
@@ -35,6 +36,7 @@ public class ScenesManager : MonoBehaviour
         gameBar = Instantiate(gameBarPrefab, gameView.transform);
         gameBarComponent = gameBar.GetComponent<GameBar>();
         mapButton = gameBarComponent.mapButton.GetComponent<ShowMap>();
+        mapData = mapButton.map.GetComponent<MapInfo>();
         mapButton.modal = modal;
 
         gameState = GameState.START;

@@ -18,19 +18,6 @@ public class MapInfo : MonoBehaviour
     {
         if (playerPosition != null)
         {
-            foreach(var node in playerPosition.connectedNodes)
-            {
-                Button selectableNode = node.GetComponent<Button>();
-                if (selectableNode!= null && node != nodeInfo)
-                {
-                    selectableNode.interactable = false;
-                }
-                else if(node == nodeInfo)
-                {
-                    selectableNode.enabled = false;
-                }
-            }
-
             for (int i = 0; i < playerPosition.connectedNodes.Count; i++)
             {
                 

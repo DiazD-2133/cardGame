@@ -8,7 +8,7 @@ public class SceneConstructor : MonoBehaviour
     private int totalEnemies;
     [SerializeField] private EnemiesManager enemies;
     [SerializeField] private BattleSystem battleSystem;
-    [SerializeField] private ScenesManager sceneManager;
+    [SerializeField] private ScenesManager scenesManager;
 
     
 
@@ -16,16 +16,25 @@ public class SceneConstructor : MonoBehaviour
     {
         switch (nodeData.roomType.Name){
             case RoomType.NormalEnemy:
-            sceneManager.gameState = GameState.BATTLE;
-            sceneManager.ChangeScene();
+                scenesManager.gameState = GameState.BATTLE;
+                scenesManager.ChangeScene();
 
-            nodeData.FillData();
-            totalEnemies = 2;
-            enemies.enemiesArea = battleSystem.scenesManager.battleSceneComponent.enemiesArea;
-            enemies.InstantiateEnemies(totalEnemies, nodeData.characterOnScene);
-            battleSystem.state = BattleState.START;
-            StartCoroutine(battleSystem.SetupBattle());
+                nodeData.FillData();
+                totalEnemies = 2;
+                enemies.enemiesArea = battleSystem.scenesManager.battleSceneComponent.enemiesArea;
+                enemies.InstantiateEnemies(totalEnemies, nodeData.characterOnScene);
+                battleSystem.state = BattleState.START;
+                StartCoroutine(battleSystem.SetupBattle());
+            break;
+            case RoomType.Rest:
+                Debug.Log("Rest");
+                scenesManager.mapData.NextPositions(scenesManager.mapData.playerPosition);
+            break;
+            case RoomType.EliteEnemy:
+                Debug.Log("EliteEnemy");
+                scenesManager.mapData.NextPositions(scenesManager.mapData.playerPosition);
             break;
         }
+
     }
 }

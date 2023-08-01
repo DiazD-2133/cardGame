@@ -45,6 +45,13 @@ public class NodeInfo : MonoBehaviour
             roomType = boss;
             icon.sprite = roomType.roomIcon;
         }
+
+        if (node.colIndex > 1 && node.colIndex < 14)
+        {
+            // Limitar el total de elites y campfires
+            roomType = roomTypesList[Random.Range(0, roomTypesList.Count)];
+            icon.sprite = roomType.roomIcon;
+        }
     }
 
     public void FillData()

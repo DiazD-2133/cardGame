@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8261f04c5a003314d83950e9e555858c, type: 3}
   m_Name: EliteEnemy
   m_EditorClassIdentifier: 
-  Name: 0
-  roomIcon: {fileID: 0}
+  Name: 1
+  roomIcon: {fileID: 21300000, guid: 1ce5a808cb4f5864abf68de50339e41d, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   Name: 2
-  roomIcon: {fileID: 21300000, guid: 3c0c00dc79cf9cd4e97102fbcbbca685, type: 3}
+  roomIcon: {fileID: 21300000, guid: a5856f96d9e0dfb43b11911522d255a2, type: 3}

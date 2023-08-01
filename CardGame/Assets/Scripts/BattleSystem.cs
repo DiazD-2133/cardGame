@@ -201,16 +201,20 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             Debug.Log("You Win!");
+
+            playerData.playerHUD.SetActive(false);
+
+            decksAndDraw.MoveToDiscardDeck();
+            decksAndDraw.MoveToDeck();
+            scenesManager.mapData.NextPositions(scenesManager.mapData.playerPosition);
+
         }
         else if(state == BattleState.LOST)
         {
             Debug.Log("Game Over");
         }
 
-        playerData.playerHUD.SetActive(false);
-
-        decksAndDraw.MoveToDiscardDeck();
-        decksAndDraw.MoveToDeck();
+        
     }
 
     private void AddToBuffDebuffList(BuffsAndDebuffs status, Player target)

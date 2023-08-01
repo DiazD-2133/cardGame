@@ -16,13 +16,13 @@ public class NodeClickHandler : MonoBehaviour
 
     public void OnNodeClick()
     {
-        NodeInfo nodeData = nodeInfo.GetComponent<NodeInfo>();
-        scene.nodeData = nodeData;
-        scene.NodeTypeSceneCreator();
         map.CloseMap();
         MapInfo sceneMap = map.map.GetComponent<MapInfo>();
         sceneMap.ChangePlayerPosition(nodeInfo);
-        sceneMap.NextPositions(nodeInfo);
+        NodeInfo nodeData = nodeInfo.GetComponent<NodeInfo>();
+        scene.nodeData = nodeData;
+        scene.NodeTypeSceneCreator();
+
     }
     
 }

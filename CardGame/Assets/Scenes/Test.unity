@@ -377,7 +377,7 @@ MonoBehaviour:
   nodeData: {fileID: 0}
   enemies: {fileID: 590138855}
   battleSystem: {fileID: 590138852}
-  sceneManager: {fileID: 590138858}
+  scenesManager: {fileID: 590138858}
 --- !u!114 &590138858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +402,7 @@ MonoBehaviour:
   startSceneComponent: {fileID: 0}
   gameBarComponent: {fileID: 0}
   gameState: 0
+  mapData: {fileID: 0}
   playerOnScene: {fileID: 0}
   playerData: {fileID: 0}
 --- !u!1 &891651503
