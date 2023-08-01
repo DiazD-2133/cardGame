@@ -20,6 +20,9 @@ public class NodeClickHandler : MonoBehaviour
         scene.nodeData = nodeData;
         scene.NodeTypeSceneCreator();
         map.CloseMap();
+        MapInfo sceneMap = map.map.GetComponent<MapInfo>();
+        sceneMap.ChangePlayerPosition(nodeInfo);
+        sceneMap.NextPositions(nodeInfo);
     }
     
 }

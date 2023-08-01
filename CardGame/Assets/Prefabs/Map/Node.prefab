@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.14509805, g: 0.1882353, b: 0.1764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -113,11 +113,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.14901961, g: 0.21568629, b: 0.20000002, a: 1}
+    m_HighlightedColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0.60784316}
+    m_PressedColor: {r: 0.77254903, g: 0.18823531, b: 0.1764706, a: 1}
+    m_SelectedColor: {r: 0.1432894, g: 0.18867922, b: 0.5372549, a: 1}
+    m_DisabledColor: {r: 0.14901961, g: 0.21568629, b: 0.20000002, a: 0.50980395}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -131,7 +131,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 5073157023234735681}
   m_OnClick:
     m_PersistentCalls:
@@ -182,8 +182,11 @@ MonoBehaviour:
   roomTypesList:
   - {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
   - {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}
+  - {fileID: 11400000, guid: ee2917a9e35b9e24286741fd21a8f7f1, type: 2}
   normalEnemy: {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
   rest: {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}
   boss: {fileID: 11400000, guid: 89b8c3fddf0cad74eb0daee06d579606, type: 2}
+  isActive: 0
+  characterOnScene: {fileID: 0}
   roomType: {fileID: 0}
   node: {fileID: 0}

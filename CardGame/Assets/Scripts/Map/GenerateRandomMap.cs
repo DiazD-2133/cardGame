@@ -42,6 +42,9 @@ public class GenerateRandomMap : MonoBehaviour
         foreach(var path in startPositionPaths.paths){
             Destroy(path);
         }
+        startPositionPaths.paths.Clear();
+        startPositionPaths.connectedNodes.Clear();
+
         foreach(var node in nodes){
             Destroy(node);
         }

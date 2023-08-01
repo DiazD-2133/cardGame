@@ -14,5 +14,6 @@ public class ChooseMap : MonoBehaviour
         map.selectedMap = mapEnemies[0];
         generateMap.ClearMap();
         generateMap.GenerateMap();
+        map.InitializePlayerPosition();
     }
 }
