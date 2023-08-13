@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu]
-public class Character : ScriptableObject
+public class CharacterData : ScriptableObject
 {
 	public CharacterClass characterClass;
     public enum CharacterClass{Warrior, Assassin, Enemy, Boss}

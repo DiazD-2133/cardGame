@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public Player enemyData;
+    public CharacterElements enemyData;
     public List<Card> startingDeck;
     public Card selectedAction;
     public List<string> actions = new (){"Damage 10", "weak 2"};

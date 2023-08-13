@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemiesList : ScriptableObject
 {
     // Start is called before the first frame update
-    public List<Character> normalEnemies = new List<Character>();
-    public List<Character> eliteEnemies = new List<Character>();
-    public List<Character> bossEnemies = new List<Character>();
+    public List<CharacterData> normalEnemies = new List<CharacterData>();
+    public List<CharacterData> eliteEnemies = new List<CharacterData>();
+    public List<CharacterData> bossEnemies = new List<CharacterData>();
 }

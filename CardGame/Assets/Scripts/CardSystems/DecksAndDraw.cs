@@ -8,7 +8,7 @@ public class DecksAndDraw : MonoBehaviour
     public GameObject playerDeck; // Player Deck(Child of Player prefab)
     public GameObject discardDeck;  // Discard Deck(Child of Game Manager)
     public GameObject playerHand; // Cards Position GameObject
-    public Player playerData;
+    public CharacterElements playerData;
 
     // For Cards movement
     List <GameObject> cards = new List<GameObject>();
@@ -66,7 +66,7 @@ public class DecksAndDraw : MonoBehaviour
         }
     }
 
-    public void InstantiatePlayerCards(Player playerData)
+    public void InstantiatePlayerCards(CharacterElements playerData)
     {
         for (int i = 0; i < playerData.deck.Count; i++)
         {

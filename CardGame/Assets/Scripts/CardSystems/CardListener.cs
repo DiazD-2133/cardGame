@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Character;
+using static CharacterData;
 
 public class CardListener : MonoBehaviour
 {
     [SerializeField] private BattleSystem battleSystem;
 
-    private void ApplyActions(CardActions action, int value, Player playerData = null, GameObject enemy = null)
+    private void ApplyActions(CardActions action, int value, CharacterElements playerData = null, GameObject enemy = null)
     {
         switch (action) 
         {
@@ -37,7 +37,7 @@ public class CardListener : MonoBehaviour
         }
     }
     
-    private void ApplyStatuses(Card cardData, CardStatuses status, int value, Player playerData = null, GameObject enemy = null)
+    private void ApplyStatuses(Card cardData, CardStatuses status, int value, CharacterElements playerData = null, GameObject enemy = null)
     {
         switch (status) {
             case CardStatuses.Block:
@@ -62,7 +62,7 @@ public class CardListener : MonoBehaviour
         }
     }
 
-    private void GetActions(Card cardData, Player playerData = null, GameObject enemy = null)
+    private void GetActions(Card cardData, CharacterElements playerData = null, GameObject enemy = null)
     {
         foreach (var action in cardData.actionsList)
         {
@@ -72,7 +72,7 @@ public class CardListener : MonoBehaviour
         }
     }
 
-    private void ApplyStatuses(Card cardData, Player playerData = null, GameObject enemy = null)
+    private void ApplyStatuses(Card cardData, CharacterElements playerData = null, GameObject enemy = null)
     {
         foreach(var status in cardData.statusesList)
         {
@@ -82,7 +82,7 @@ public class CardListener : MonoBehaviour
         }
     }
 
-    public void CallCardApplications(Card cardData, Player playerData, GameObject enemy = null)
+    public void CallCardApplications(Card cardData, CharacterElements playerData, GameObject enemy = null)
     {
         if (enemy != null && playerData != null)
         {

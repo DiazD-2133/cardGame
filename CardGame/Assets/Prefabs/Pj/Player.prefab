@@ -1295,9 +1295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80de9fb7c0598b49b888c4093645cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pjArt: {fileID: 6048639053052563622}
-  data: {fileID: 0}
+  characterImage: {fileID: 6048639053052563622}
   playerHUD: {fileID: 6561561184523693944}
+  data: {fileID: 0}
   deck: []
 --- !u!114 &-8427189577668441467
 MonoBehaviour:

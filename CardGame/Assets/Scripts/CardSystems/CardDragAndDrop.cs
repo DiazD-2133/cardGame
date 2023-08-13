@@ -8,7 +8,7 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public GameObject arrowPrefab;
 
     private GameObject gameManager;
-    private Player  playerData;
+    private CharacterElements  playerData;
     private GameObject arrowInstance;
     private Card cardData;
     private DecksAndDraw drawManager;
@@ -23,7 +23,7 @@ public class CardDragAndDrop : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public void Start()
     {
         gameManager = GameObject.Find("Game Manager");
-        playerData = GameObject.Find("Player").GetComponent<Player>();
+        playerData = GameObject.Find("Player").GetComponent<CharacterElements>();
         drawManager = gameManager.GetComponent<DecksAndDraw>();
         fightRoom = gameManager.GetComponent<CardListener>();
 

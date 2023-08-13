@@ -386,7 +386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80de9fb7c0598b49b888c4093645cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pjArt: {fileID: 4423675945673610803}
+  characterImage: {fileID: 4423675945673610803}
+  playerHUD: {fileID: 0}
   data: {fileID: 0}
   deck: []
 --- !u!114 &8593279777981469681
@@ -405,6 +406,8 @@ MonoBehaviour:
   maxHealthText: {fileID: 4423675945167653022}
   currentHealthText: {fileID: 4423675945854215680}
   currentArmorText: {fileID: 3641517455681454402}
+  currentMovementsText: {fileID: 0}
+  maxMovementsText: {fileID: 0}
   healthBarImage: {fileID: 4423675944668363081}
   armorImage: {fileID: 8776367376503909181}
 --- !u!114 &1574934436918680389
@@ -421,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
   startingDeck: []
+  selectedAction: {fileID: 0}
   actions:
   - Damage 10
   - weak 2

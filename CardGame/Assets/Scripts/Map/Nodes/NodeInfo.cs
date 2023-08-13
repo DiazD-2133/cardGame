@@ -11,7 +11,7 @@ public class NodeInfo : MonoBehaviour
     [SerializeField] private Rooms boss;
     private MapInfo map;
     public bool isActive;
-    public Character characterOnScene;
+    public CharacterData characterOnScene;
     public Rooms roomType;
     private Image icon;
 

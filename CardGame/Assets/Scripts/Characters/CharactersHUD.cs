@@ -6,7 +6,7 @@ using TMPro;
 
 public class CharactersHUD : MonoBehaviour
 {
-    [SerializeField] private Player characterData;
+    [SerializeField] private CharacterElements characterData;
     [SerializeField] private TextMeshProUGUI maxHealthText;
     [SerializeField] private TextMeshProUGUI currentHealthText;
     [SerializeField] private TextMeshProUGUI currentArmorText;

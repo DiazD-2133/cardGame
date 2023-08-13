@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Character;
+using static CharacterData;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
 
@@ -13,26 +13,26 @@ public class BattleSystem : MonoBehaviour
     public Button endPlayerTurnButton;
 
 
-    [SerializeField] private Character SelectedCharacter;
+    [SerializeField] private CharacterData SelectedCharacter;
     [SerializeField] private CardListener enemiesActionListener;
     [SerializeField] private EnemiesManager enemiesManager;
     [SerializeField] private DecksAndDraw decksAndDraw;
     [SerializeField] private GameObject playerArea;
 
     private GameObject playerOnScene;
-    private Player playerData;
+    private CharacterElements playerData;
 
     private void InstantiateNewPlayer()
     {
         playerArea = scenesManager.battleSceneComponent.playerArea;
         GameObject newPlayerOnScene = Instantiate(SelectedCharacter.characterPrefab, playerArea.transform);
-        Character playerCopy = Instantiate(SelectedCharacter);
+        CharacterData playerCopy = Instantiate(SelectedCharacter);
 
         newPlayerOnScene.name = "Player";
-        playerData = newPlayerOnScene.GetComponent<Player>();
+        playerData = newPlayerOnScene.GetComponent<CharacterElements>();
         playerData.data = playerCopy;
         playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<CharactersHUD>();
-        playerData.pjArt.sprite = SelectedCharacter.splashArt;
+        playerData.characterImage.sprite = SelectedCharacter.splashArt;
         playerOnScene = newPlayerOnScene;
     }
 
@@ -111,7 +111,7 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator AttackEnemy(GameObject enemy, int dmg)
     {
-        Player enemyData = enemy.GetComponent<Player>();
+        CharacterElements enemyData = enemy.GetComponent<CharacterElements>();
         bool isDead = enemyData.data.TakeDamage(dmg);
 
         if (isDead)
@@ -141,7 +141,7 @@ public class BattleSystem : MonoBehaviour
         if (cardData.target == Target.Enemy)
         {
             if (enemy != null) {
-                Player enemyData = enemy.GetComponent<Player>();
+                CharacterElements enemyData = enemy.GetComponent<CharacterElements>();
                 AddToBuffDebuffList(status, enemyData);
                 Debug.Log(enemyData.data.CharacterDebuffsList[0].Status);
             }
@@ -155,7 +155,7 @@ public class BattleSystem : MonoBehaviour
         {
             foreach (var enemyOnScene in enemiesManager.enemiesOnScene)
             {
-                Player enemyData = enemyOnScene.GetComponent<Player>();
+                CharacterElements enemyData = enemyOnScene.GetComponent<CharacterElements>();
                 AddToBuffDebuffList(status, enemyData);
             }
         }
@@ -172,7 +172,7 @@ public class BattleSystem : MonoBehaviour
 
         foreach (var enemy in enemiesManager.enemiesOnScene)
         {
-            Player enemyData = enemy.GetComponent<Player>();
+            CharacterElements enemyData = enemy.GetComponent<CharacterElements>();
             if(enemyData.data.armor > 0)
             {
                 enemyData.data.armor = 0;
@@ -217,7 +217,7 @@ public class BattleSystem : MonoBehaviour
         
     }
 
-    private void AddToBuffDebuffList(BuffsAndDebuffs status, Player target)
+    private void AddToBuffDebuffList(BuffsAndDebuffs status, CharacterElements target)
     {
         List<CardStatuses> BuffsList = new() { CardStatuses.Block, CardStatuses.Dexterity, CardStatuses.Strength, CardStatuses.Reflect };
         List<CardStatuses> Debuff = new() { CardStatuses.Exhaust, CardStatuses.Poison, CardStatuses.Vulnerable, CardStatuses.Weak };

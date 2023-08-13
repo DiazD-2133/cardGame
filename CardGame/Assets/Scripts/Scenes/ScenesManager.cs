@@ -13,7 +13,7 @@ public class ScenesManager : MonoBehaviour
     [SerializeField] GameObject gameBarPrefab;
     [SerializeField] GameObject startScenePrefab;
     [SerializeField] GameObject battleScenePrefab;
-    [SerializeField] private Character SelectedCharacter;
+    [SerializeField] private CharacterData SelectedCharacter;
 
 
     private GameObject gameBar;
@@ -28,7 +28,7 @@ public class ScenesManager : MonoBehaviour
     public MapInfo mapData;
 
     public GameObject playerOnScene;
-    public Player playerData;
+    public CharacterElements playerData;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +67,7 @@ public class ScenesManager : MonoBehaviour
                 } 
                 else
                 {
-                    playerData = playerOnScene.GetComponent<Player>();
+                    playerData = playerOnScene.GetComponent<CharacterElements>();
                 }
 
                 playerOnScene.transform.SetParent(startSceneComponent.playerArea.transform, false);
@@ -97,13 +97,13 @@ public class ScenesManager : MonoBehaviour
     public void InstantiateNewPlayer()
     {
         GameObject newPlayerOnScene = Instantiate(SelectedCharacter.characterPrefab);
-        Character playerCopy = Instantiate(SelectedCharacter);
+        CharacterData newPlayerData = Instantiate(SelectedCharacter);
 
         newPlayerOnScene.name = "Player";
-        playerData = newPlayerOnScene.GetComponent<Player>();
-        playerData.data = playerCopy;
+        playerData = newPlayerOnScene.GetComponent<CharacterElements>();
+        playerData.data = newPlayerData;
         playerData.data.updateBattleHUD = newPlayerOnScene.GetComponent<CharactersHUD>();
-        playerData.pjArt.sprite = SelectedCharacter.splashArt;
+        playerData.characterImage.sprite = SelectedCharacter.splashArt;
         playerOnScene = newPlayerOnScene;
     }
 }

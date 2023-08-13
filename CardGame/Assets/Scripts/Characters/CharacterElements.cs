@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class CharacterElements : MonoBehaviour
 {
-    public Image pjArt;
-
-    public Character data;
+    public Image characterImage;
     public GameObject playerHUD;
 
-
+    public CharacterData data;
     public List<Card> deck;
 
 
