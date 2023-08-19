@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPointNode: {fileID: 1373828737771091505}
   endPointNode: {fileID: 8678645415155556635}
+  mapWidth: {fileID: 5149212373565308665}
   middleNodesPosition: {fileID: 555570256343744381}
   startPoint: {fileID: 5527951974159710069}
   endPoint: {fileID: 6994210115909324505}
@@ -1168,7 +1169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2645, y: 0}
+  m_AnchoredPosition: {x: 2645.0007, y: 0}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6792840245230454108

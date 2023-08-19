@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class GenerateRandomMap : MonoBehaviour
 {
     public GameObject startPointNode;
     public GameObject endPointNode;
+    private RectTransform canvasRectTransform;
+    [SerializeField] private RectTransform mapWidth;
     [SerializeField] private Transform middleNodesPosition;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
@@ -13,6 +16,7 @@ public class GenerateRandomMap : MonoBehaviour
     private float minDistance = 300f;
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<GameObject> nodes = new List<GameObject>();
+    private List<GameObject> nodesWithOutPaths = new List<GameObject>();
     [SerializeField] public NodesList nodesGrid = new NodesList();
     private int lastCol = 0;
 
@@ -23,6 +27,19 @@ public class GenerateRandomMap : MonoBehaviour
 
     public void GenerateMap()
     {
+        RectTransform middleNodesScale = middleNodesPosition.GetComponent<RectTransform>();
+        middleNodesScale.localScale = new Vector3(1, 1, 1);
+
+        canvasRectTransform = GameObject.Find("Game UI").GetComponent<RectTransform>();
+        Vector3 canvasScale = canvasRectTransform.localScale;
+        
+        Debug.Log("Canvas Scale: " + canvasScale.x + ", " + canvasScale.y + ", " + canvasScale.z);
+        
+        float parentWidth = mapWidth.rect.width;
+        float parentHeight = mapWidth.rect.height;
+
+        Debug.Log(parentWidth + " / " + parentHeight);
+
         GameObjectList firstPosition = new GameObjectList();
         firstPosition.nodes.Add(startPointNode);
         nodesGrid.lists.Add(firstPosition);
@@ -33,18 +50,25 @@ public class GenerateRandomMap : MonoBehaviour
         nodesGrid.lists.Add(lastPosition);
 
         CreateMap();
+        
+        middleNodesScale.localScale = canvasScale;
+
+        GeneratePaths(nodesWithOutPaths);
+
+        nodesWithOutPaths.Clear();
+
     }
 
     public void ClearMap()
     {
         gridPositions.Clear();
-        Map.NodeMapInfo startPositionPaths = startPointNode.GetComponent<Map.NodeMapInfo>(); 
+        
+        Map.NodeMapInfo startNodeComponent = startPointNode.GetComponent<Map.NodeMapInfo>(); 
+        startNodeComponent.connectedNodes.Clear();
 
-        foreach(var path in startPositionPaths.paths){
-            Destroy(path);
-        }
-        startPositionPaths.paths.Clear();
-        startPositionPaths.connectedNodes.Clear();
+        DestroyPaths(startPointNode);
+
+
 
         foreach(var node in nodes){
             Destroy(node);
@@ -52,6 +76,35 @@ public class GenerateRandomMap : MonoBehaviour
 
         nodes.Clear();
         nodesGrid.lists.Clear();
+    }
+
+    private void GeneratePaths(List<GameObject> nodesWithOutPaths)
+    {
+        bool inList = true;
+        foreach(var node in nodesWithOutPaths)
+        {
+            Map.NodeMapInfo sourceNodeComponent = node.GetComponent<Map.NodeMapInfo>();
+            Debug.Log("nccc " + sourceNodeComponent.numConnections);
+            for(int i = 0; i < sourceNodeComponent.numConnections; i++)
+            {
+                Debug.Log(i + " nc " + sourceNodeComponent.numConnections);
+                sourceNodeComponent.ConnectTo(sourceNodeComponent.connectedNodes[i], inList);
+            }
+        }
+    }
+
+    private void DestroyPaths(GameObject node)
+    {
+        Map.NodeMapInfo nodePositionPaths = node.GetComponent<Map.NodeMapInfo>(); 
+
+        foreach(var path in nodePositionPaths.paths){
+            Destroy(path.gameObject);
+        }
+
+        nodePositionPaths.paths.Clear();
+
+
+        
     }
 
     private void CreateMap()
@@ -67,8 +120,8 @@ public class GenerateRandomMap : MonoBehaviour
     private void GenerateGrid()
     {
         // Calculate the horizontal and vertical diameters of the rectangle
-        float horizontalDiameter = Vector2.Distance(startPoint.position, endPoint.position);
-        float verticalDiameter = horizontalDiameter / 2f;
+        // float horizontalDiameter = Vector2.Distance(startPoint.position, endPoint.position);
+        // float verticalDiameter = horizontalDiameter / 2f;
 
         // Calculate the center of the rectangle
         Vector2 center = (startPoint.position + endPoint.position) / 2f;
@@ -220,6 +273,7 @@ public class GenerateRandomMap : MonoBehaviour
                 }
 
                 // Connect the current node to the target nodes randomly
+                
                 for (int i = 0; i < numConnections; i++)
                 {
                     // Check if there are valid target nodes to connect with
@@ -228,7 +282,7 @@ public class GenerateRandomMap : MonoBehaviour
                         // Choose a random target node from the validTargetNodes list
                         int randomIndex = Random.Range(0, validTargetNodes.Count);
                         Map.NodeMapInfo selectedNode = validTargetNodes[randomIndex];
-
+                        
                         // Connect the source node to the selected target node
                         sourceNodeComponent.ConnectTo(selectedNode);
                         // Debug.Log("Connected: " + sourceNode.name + " to " + selectedNode.name);
@@ -236,6 +290,12 @@ public class GenerateRandomMap : MonoBehaviour
                         // Remove the selected node from the targetNodes list to avoid duplicate connections
                         validTargetNodes.Remove(selectedNode);
                     }
+                }
+
+                if (index == 0 || index == nodesGrid.lists.Count - 2)
+                {
+                    DestroyPaths(sourceNode);
+                    nodesWithOutPaths.Add(sourceNode);
                 }
 
                 previousHighestNode = sourceNodeComponent.GetNodeWithHighestRowIndex();

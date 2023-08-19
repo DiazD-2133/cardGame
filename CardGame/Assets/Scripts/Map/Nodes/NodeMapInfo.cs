@@ -16,7 +16,11 @@ namespace Map
 
         public void GetRandomNumConnections(int index)
         {
-            if(index < 4)
+            if(index == 14)
+            {
+                numConnections = 1;
+            }
+            else if(index < 4 && index > 14)
             {
                 numConnections = Random.Range(1, 4);
             }
@@ -26,7 +30,7 @@ namespace Map
             }
         }
 
-        public void ConnectTo(NodeMapInfo otherNode)
+        public void ConnectTo(NodeMapInfo otherNode, bool inList = false)
         {
             GameObject newLine = Instantiate(lineRendererObject);
             newLine.transform.SetParent(transform);
@@ -41,7 +45,10 @@ namespace Map
             connected = true;
             otherNode.connected = true;
 
-            connectedNodes.Add(otherNode);
+            if (!inList)
+            {
+                connectedNodes.Add(otherNode);
+            }
         }
 
         public NodeMapInfo GetNodeWithHighestRowIndex()
