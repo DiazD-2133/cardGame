@@ -6,10 +6,10 @@ public enum GameState { START, BATTLE, REST, EVENT, BOSS, END}
 
 public class ScenesManager : MonoBehaviour
 {
-    [SerializeField] GameObject gameView;
     [SerializeField] GameObject scenesPosition;
     [SerializeField] GameObject modal;
 
+    [SerializeField] GameObject gameBarPosition;
     [SerializeField] GameObject gameBarPrefab;
     [SerializeField] GameObject startScenePrefab;
     [SerializeField] GameObject battleScenePrefab;
@@ -33,7 +33,7 @@ public class ScenesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameBar = Instantiate(gameBarPrefab, gameView.transform);
+        gameBar = Instantiate(gameBarPrefab, gameBarPosition.transform);
         gameBarComponent = gameBar.GetComponent<GameBar>();
         mapButton = gameBarComponent.mapButton.GetComponent<ShowMap>();
         mapData = mapButton.map.GetComponent<MapInfo>();
