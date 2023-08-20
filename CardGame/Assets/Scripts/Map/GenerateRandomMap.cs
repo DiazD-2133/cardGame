@@ -7,12 +7,15 @@ public class GenerateRandomMap : MonoBehaviour
 {
     public GameObject startPointNode;
     public GameObject endPointNode;
-    private RectTransform canvasRectTransform;
     [SerializeField] private RectTransform mapWidth;
     [SerializeField] private Transform middleNodesPosition;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
+    [SerializeField] private MapInfo mapInfo;
     public GameObject nodePrefab;
+    public GameObject startPositionNodePrefab;
+
+    private RectTransform canvasRectTransform;
     private float minDistance = 300f;
     private List<Vector3> gridPositions = new List<Vector3>();
     private List<GameObject> nodes = new List<GameObject>();
@@ -28,7 +31,8 @@ public class GenerateRandomMap : MonoBehaviour
     public void GenerateMap()
     {
         RectTransform middleNodesScale = middleNodesPosition.GetComponent<RectTransform>();
-        middleNodesScale.localScale = new Vector3(1, 1, 1);
+        middleNodesScale.localScale = Vector3.one;
+        startPoint.localScale = Vector3.one;
 
         canvasRectTransform = GameObject.Find("Game UI").GetComponent<RectTransform>();
         Vector3 canvasScale = canvasRectTransform.localScale;
@@ -41,6 +45,9 @@ public class GenerateRandomMap : MonoBehaviour
         Debug.Log(parentWidth + " / " + parentHeight);
 
         GameObjectList firstPosition = new GameObjectList();
+        startPointNode = Instantiate(startPositionNodePrefab, startPoint.transform.position, Quaternion.identity);
+        startPointNode.transform.SetParent(startPoint);
+        mapInfo.startNode = startPointNode.GetComponent<Map.NodeMapInfo>();
         firstPosition.nodes.Add(startPointNode);
         nodesGrid.lists.Add(firstPosition);
         GenerateGrid();
@@ -54,8 +61,12 @@ public class GenerateRandomMap : MonoBehaviour
         middleNodesScale.localScale = canvasScale;
 
         GeneratePaths(nodesWithOutPaths);
+        // startPoint.localScale = canvasScale;
+
 
         nodesWithOutPaths.Clear();
+
+        
 
     }
 
@@ -84,10 +95,8 @@ public class GenerateRandomMap : MonoBehaviour
         foreach(var node in nodesWithOutPaths)
         {
             Map.NodeMapInfo sourceNodeComponent = node.GetComponent<Map.NodeMapInfo>();
-            Debug.Log("nccc " + sourceNodeComponent.numConnections);
             for(int i = 0; i < sourceNodeComponent.numConnections; i++)
             {
-                Debug.Log(i + " nc " + sourceNodeComponent.numConnections);
                 sourceNodeComponent.ConnectTo(sourceNodeComponent.connectedNodes[i], inList);
             }
         }
@@ -237,6 +246,7 @@ public class GenerateRandomMap : MonoBehaviour
 
         foreach (var sourceNode in sourceNodes)
         {
+            Debug.Log(sourceNode.name);
             Map.NodeMapInfo sourceNodeComponent = sourceNode.GetComponent<Map.NodeMapInfo>();
             if (index == 0 || sourceNodeComponent.connected == true)
             {

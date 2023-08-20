@@ -10,7 +10,7 @@ public class MapInfo : MonoBehaviour
     // Came from selection
     public string stageName;
 
-    [SerializeField] Map.NodeMapInfo startNode;
+    public Map.NodeMapInfo startNode;
     private Color lineColor;
     public Map.NodeMapInfo playerPosition;
 
