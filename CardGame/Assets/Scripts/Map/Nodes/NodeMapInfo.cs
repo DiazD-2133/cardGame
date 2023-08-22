@@ -9,6 +9,8 @@ namespace Map
         public GameObject lineRendererObject;
         public GameObject lineRendererStartEndPrefab;
 
+        [SerializeField] GameObject nodeCenterPoint;
+
         public int colIndex;
         public int rowIndex;
         public int numConnections;
@@ -48,8 +50,9 @@ namespace Map
                 newLine = Instantiate(lineRendererStartEndPrefab);
             }
             newLine.transform.SetParent(transform);
+
             UnityEngine.UI.Extensions.UILineRenderer lineRenderer = newLine.GetComponent<UnityEngine.UI.Extensions.UILineRenderer>();
-            Vector3 startPosition = new Vector3(transform.position.x + 26f, transform.position.y) ;
+            Vector3 startPosition = new Vector3(nodeCenterPoint.transform.position.x, transform.position.y) ;
             Vector3 endPosition = otherNode.transform.position;
             lineRenderer.Points = new Vector2[] { startPosition, endPosition };
             // lineRenderer.color = Color.red;
