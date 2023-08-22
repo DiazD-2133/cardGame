@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRendererObject: {fileID: 7721379314303246883, guid: f73b86f606dd9d94e822299f72e16a95, type: 3}
+  lineRendererStartEndPrefab: {fileID: 0}
   colIndex: 0
   rowIndex: 2
   numConnections: 3
@@ -444,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868b0b64b80525b42aee7c6dc3d78958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPointNode: {fileID: 1373828737771091505}
+  startPointNode: {fileID: 0}
   endPointNode: {fileID: 8678645415155556635}
   mapWidth: {fileID: 5149212373565308665}
   middleNodesPosition: {fileID: 555570256343744381}
@@ -1330,6 +1331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRendererObject: {fileID: 7721379314303246883, guid: f73b86f606dd9d94e822299f72e16a95, type: 3}
+  lineRendererStartEndPrefab: {fileID: 7721379314303246883, guid: 98baa54b0ea5fff4c868022e62d71ea8, type: 3}
   colIndex: 15
   rowIndex: 2
   numConnections: 0

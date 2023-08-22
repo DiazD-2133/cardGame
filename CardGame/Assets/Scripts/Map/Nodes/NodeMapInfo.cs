@@ -7,12 +7,15 @@ namespace Map
     {
         
         public GameObject lineRendererObject;
+        public GameObject lineRendererStartEndPrefab;
+
         public int colIndex;
         public int rowIndex;
         public int numConnections;
         public bool connected;
         public List<NodeMapInfo> connectedNodes = new List<NodeMapInfo>();
         public List<UnityEngine.UI.Extensions.UILineRenderer> paths = new List<UnityEngine.UI.Extensions.UILineRenderer>();
+        private GameObject newLine;
 
         public void GetRandomNumConnections(int index)
         {
@@ -32,7 +35,18 @@ namespace Map
 
         public void ConnectTo(NodeMapInfo otherNode, bool inList = false)
         {
-            GameObject newLine = Instantiate(lineRendererObject);
+            if (!inList)
+            {
+                newLine = Instantiate(lineRendererObject);
+            }
+            else if (inList && Screen.height >= 1440)
+            {
+                newLine = Instantiate(lineRendererObject);
+            } 
+            else 
+            {
+                newLine = Instantiate(lineRendererStartEndPrefab);
+            }
             newLine.transform.SetParent(transform);
             UnityEngine.UI.Extensions.UILineRenderer lineRenderer = newLine.GetComponent<UnityEngine.UI.Extensions.UILineRenderer>();
             Vector3 startPosition = new Vector3(transform.position.x + 26f, transform.position.y) ;

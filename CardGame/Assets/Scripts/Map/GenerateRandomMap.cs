@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class GenerateRandomMap : MonoBehaviour
 {
-    public GameObject startPointNode;
+    private GameObject startPointNode;
     public GameObject endPointNode;
     [SerializeField] private RectTransform mapWidth;
     [SerializeField] private Transform middleNodesPosition;
@@ -36,13 +36,6 @@ public class GenerateRandomMap : MonoBehaviour
 
         canvasRectTransform = GameObject.Find("Game UI").GetComponent<RectTransform>();
         Vector3 canvasScale = canvasRectTransform.localScale;
-        
-        Debug.Log("Canvas Scale: " + canvasScale.x + ", " + canvasScale.y + ", " + canvasScale.z);
-        
-        float parentWidth = mapWidth.rect.width;
-        float parentHeight = mapWidth.rect.height;
-
-        Debug.Log(parentWidth + " / " + parentHeight);
 
         GameObjectList firstPosition = new GameObjectList();
         startPointNode = Instantiate(startPositionNodePrefab, startPoint.transform.position, Quaternion.identity);
@@ -61,12 +54,8 @@ public class GenerateRandomMap : MonoBehaviour
         middleNodesScale.localScale = canvasScale;
 
         GeneratePaths(nodesWithOutPaths);
-        // startPoint.localScale = canvasScale;
-
 
         nodesWithOutPaths.Clear();
-
-        
 
     }
 
@@ -74,12 +63,13 @@ public class GenerateRandomMap : MonoBehaviour
     {
         gridPositions.Clear();
         
-        Map.NodeMapInfo startNodeComponent = startPointNode.GetComponent<Map.NodeMapInfo>(); 
-        startNodeComponent.connectedNodes.Clear();
+        if (startPointNode != null)
+        {
+            Map.NodeMapInfo startNodeComponent = startPointNode.GetComponent<Map.NodeMapInfo>();
+            startNodeComponent.connectedNodes.Clear();
 
-        DestroyPaths(startPointNode);
-
-
+            DestroyPaths(startPointNode);
+        }
 
         foreach(var node in nodes){
             Destroy(node);
@@ -111,9 +101,6 @@ public class GenerateRandomMap : MonoBehaviour
         }
 
         nodePositionPaths.paths.Clear();
-
-
-        
     }
 
     private void CreateMap()
@@ -246,7 +233,6 @@ public class GenerateRandomMap : MonoBehaviour
 
         foreach (var sourceNode in sourceNodes)
         {
-            Debug.Log(sourceNode.name);
             Map.NodeMapInfo sourceNodeComponent = sourceNode.GetComponent<Map.NodeMapInfo>();
             if (index == 0 || sourceNodeComponent.connected == true)
             {
@@ -326,17 +312,5 @@ public class GenerateRandomMap : MonoBehaviour
         int rowDiff = Mathf.Abs(targetNode.rowIndex - sourceNode.rowIndex);
 
         return colDiff <= 1 && rowDiff <= 1 && colDiff + rowDiff > 0;
-    }
-
-    private bool IsNodeConnectedInNextColumn(Map.NodeMapInfo node, int nextColumnIndex)
-    {
-        foreach (var connectedNode in node.connectedNodes)
-        {
-            if (connectedNode.colIndex == nextColumnIndex)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }
