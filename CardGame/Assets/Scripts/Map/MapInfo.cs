@@ -10,6 +10,11 @@ public class MapInfo : MonoBehaviour
     // Came from selection
     public string stageName;
 
+    public int totalNodes;
+    public int totalEnemies;
+    public int totalElites;
+    public int totalCampfires;
+
     public Map.NodeMapInfo startNode;
     private Color lineColor;
     public Map.NodeMapInfo playerPosition;

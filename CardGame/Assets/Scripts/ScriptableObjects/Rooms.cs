@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
     public enum RoomType
     {
@@ -17,6 +14,6 @@ using UnityEngine.UI;
 [CreateAssetMenu( fileName = "New Room", menuName = "Rooms")]
 public class Rooms : ScriptableObject
 {
-    public RoomType Name;
+    public RoomType roomName;
     public Sprite roomIcon;
 }

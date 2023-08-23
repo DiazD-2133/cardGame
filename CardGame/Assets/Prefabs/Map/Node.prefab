@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomTypesList:
-  - {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
   - {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}
+  - {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
   - {fileID: 11400000, guid: ee2917a9e35b9e24286741fd21a8f7f1, type: 2}
   normalEnemy: {fileID: 11400000, guid: 56d92c4bad7330548b819ab860974a8b, type: 2}
   rest: {fileID: 11400000, guid: 3ccc159704132ab4596df6dbcf66401f, type: 2}

@@ -15,5 +15,10 @@ public class ChooseMap : MonoBehaviour
         generateMap.ClearMap();
         generateMap.GenerateMap();
         map.InitializePlayerPosition();
+
+        map.totalNodes = 0;
+        map.totalEnemies = 0;
+        map.totalElites = 0;;
+        map.totalCampfires = 0;
     }
 }

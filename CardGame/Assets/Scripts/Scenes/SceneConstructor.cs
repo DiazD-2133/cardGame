@@ -14,7 +14,7 @@ public class SceneConstructor : MonoBehaviour
 
     public void NodeTypeSceneCreator()
     {
-        switch (nodeData.roomType.Name){
+        switch (nodeData.roomType.roomName){
             case RoomType.NormalEnemy:
                 scenesManager.gameState = GameState.BATTLE;
                 scenesManager.ChangeScene();

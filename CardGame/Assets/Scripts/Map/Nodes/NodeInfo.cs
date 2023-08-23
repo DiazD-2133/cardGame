@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NodeInfo : MonoBehaviour
 {
-    public List<Rooms> roomTypesList = new List<Rooms>();
+    [SerializeField] private List<Rooms> roomTypesList = new List<Rooms>();
     [SerializeField] private Rooms normalEnemy;
     [SerializeField] private Rooms rest;
     [SerializeField] private Rooms boss;
@@ -21,6 +21,8 @@ public class NodeInfo : MonoBehaviour
     {
         map = GameObject.Find("Map").GetComponent<MapInfo>();
 
+        map.totalNodes += 1; 
+
         icon = GetComponent<Image>();
         node = GetComponent<Map.NodeMapInfo>();
         SetRoomType();
@@ -32,12 +34,14 @@ public class NodeInfo : MonoBehaviour
         {
             roomType = normalEnemy;
             icon.sprite = roomType.roomIcon;
+            map.totalEnemies += 1;
         }
         
         if (node.colIndex == 14)
         {
             roomType = rest;
             icon.sprite = roomType.roomIcon;
+            map.totalCampfires += 1;
         }
         
         if (node.colIndex == 15)
@@ -49,14 +53,23 @@ public class NodeInfo : MonoBehaviour
         if (node.colIndex > 1 && node.colIndex < 14)
         {
             // Limitar el total de elites y campfires
-            roomType = roomTypesList[Random.Range(0, roomTypesList.Count)];
+            int randomIndex = Random.Range(0, roomTypesList.Count);
+            roomType = roomTypesList[randomIndex];;
+            if (node.colIndex < 4)
+            {
+                while (roomType.roomName == RoomType.Rest || roomType.roomName == RoomType.EliteEnemy)
+                {
+                    roomType = roomTypesList[Random.Range(0, roomTypesList.Count)];
+                }
+            } 
+
             icon.sprite = roomType.roomIcon;
         }
     }
 
     public void FillData()
     {
-        switch (roomType.Name){
+        switch (roomType.roomName){
             case RoomType.NormalEnemy:
 
             int randomIndex = Random.Range(0, map.selectedMap.normalEnemies.Count);
