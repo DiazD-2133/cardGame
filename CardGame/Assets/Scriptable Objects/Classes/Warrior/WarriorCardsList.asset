@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8261f04c5a003314d83950e9e555858c, type: 3}
-  m_Name: Rest
+  m_Script: {fileID: 11500000, guid: 7e67fc8dc8ee3f7459ebf38f8b0c8265, type: 3}
+  m_Name: WarriorCardsList
   m_EditorClassIdentifier: 
-  roomName: 4
-  roomIcon: {fileID: 21300000, guid: c48479120c9394c439532c196729e304, type: 3}
+  characterClass: 0
+  commonCards:
+  - {fileID: 11400000, guid: 72603948191ba0346a2c06e99606bb97, type: 2}
+  rareCards: []
+  epicsCards: []
+  unbailableCards: []

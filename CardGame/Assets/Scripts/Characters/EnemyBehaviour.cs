@@ -20,7 +20,6 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     public Card ChooseAction(List<Card> actions, List<float> probabilities)
     {
         float totalProbability = 0f;

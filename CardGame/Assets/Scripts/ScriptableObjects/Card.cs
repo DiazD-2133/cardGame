@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Level
+{
+    Initial,
+    Common,
+    Rare,
+    Epic
+}
 public enum CardType
 {
     Ability,
@@ -29,6 +36,7 @@ public enum CardActions
 public enum CardStatuses
 {
     Block,
+    Decrease,
     Dexterity,
     Exhaust,
     Poison,
@@ -58,6 +66,7 @@ public class StatusEffect
 public class Card : ScriptableObject
 {
     public Sprite artwork;
+    public Level cardLevel;
 
     public string cardName;
 
@@ -75,6 +84,7 @@ public class Card : ScriptableObject
     public Target target;
 
     public bool selectable;
+
     [Header("Only Enemies Cards")]
     public float probability;
 

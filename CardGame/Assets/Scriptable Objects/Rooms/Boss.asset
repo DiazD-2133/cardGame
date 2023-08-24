@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8261f04c5a003314d83950e9e555858c, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  Name: 2
+  roomName: 2
   roomIcon: {fileID: 21300000, guid: a5856f96d9e0dfb43b11911522d255a2, type: 3}

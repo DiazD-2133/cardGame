@@ -86,7 +86,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Enemys on Scene");
+            Debug.Log("No Enemies on Scene");
         }
         
     }
@@ -200,6 +200,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
+            playerData.deck.Clear();
             Debug.Log("You Win!");
 
             playerData.playerHUD.SetActive(false);
